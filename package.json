@@ -7,7 +7,8 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate && npm run cache:clean",
-    "cache:clean": "node cache-clean.js"
+    "cache:clean": "node cache-clean.js",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "@nuxtjs/apollo": "^4.0.1-rc.5",
