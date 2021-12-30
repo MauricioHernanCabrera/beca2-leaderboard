@@ -1,0 +1,70 @@
+// colors
+$color_primary: #4ed6de;
+$color_secondary: #fb8c00;
+$color_success: #4caf50;
+$color_warning: #fb8c00;
+$color_error: #ff5252;
+$color_info: #5cbbf6;
+$color_light: #ffffff;
+$color_light2: #b6c8ef;
+$color_dark: #344767;
+$color_dark2: #121212;
+
+$dashboard_item_description_color: #7c8286;
+$dashboard_item_pair_color: #fafafa;
+
+$layout_dashboard_border_color: #d1d3d5;
+
+$layout_auth_bg_color: #f4f3f6;
+$layout_dashboard_bg_color: #242325;
+
+$btn_social_login_color: #7c8286;
+$btn_social_login_bg: #ffffff;
+$btn_social_login_border_color: #d1d3d5;
+
+$theme_colors: (
+  primary: $color_primary,
+  secondary: $color_secondary,
+  success: $color_success,
+  warning: $color_warning,
+  error: $color_error,
+  info: $color_info,
+  light: $color_light,
+  dark: $color_dark,
+  "transparent": "transparent"
+);
+
+// $theme_colors: (
+//   primary:       $color_primary,
+//   secondary:     $color_secondary,
+//   success:       $color_success,
+//   warning:       $color_warning,
+//   error:         $color_error,
+//   info:          $color_info,
+//   light:         $color_light,
+//   dark:          $color_dark,
+//   'transparent': 'transparent',
+// );
+
+// font_family
+$font_1: "Montserrat", sans-serif;
+$font_2: "Changa One", cursive;
+
+// fonts
+$fonts: (
+  1: $font_1,
+  2: $font_2
+);
+
+// padding
+$padding_max: 15;
+
+// margin
+$margin_max: 15;
+
+$container_name: custom_container;
+
+// has_responsive
+$display_has_responsive: true;
+
+@import "./../../node_modules/crumb-scss/src/variables";
