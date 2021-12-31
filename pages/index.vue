@@ -39,6 +39,10 @@
           <CardSlp :value="item.total" />
         </template>
 
+        <template v-slot:item.farmingDays="{ item }">
+          <CardFarmingDays :value="item.farmingDays" />
+        </template>
+
         <template v-slot:item.team="{ item }">
           <div class="team" v-if="item.team.length > 0">
             <a
@@ -74,6 +78,7 @@ import { GET_AXIES_OWNER } from "@/graphql";
 import CardSlp from "@/components/Shared/CardSlp";
 import CardCups from "@/components/Shared/CardCups";
 import CardRanking from "@/components/Shared/CardRanking";
+import CardFarmingDays from "@/components/Shared/CardFarmingDays";
 
 export default {
   name: "Home",
@@ -84,6 +89,7 @@ export default {
     CardSlp,
     CardCups,
     CardRanking,
+    CardFarmingDays,
   },
 
   data() {
@@ -111,6 +117,10 @@ export default {
         {
           text: "SLP Total",
           value: "total",
+        },
+        {
+          text: "Días de farmeo",
+          value: "farmingDays",
         },
         {
           text: "Equipo",
@@ -184,7 +194,7 @@ export default {
 
           const [, , leaderboard] = items;
 
-          const farmData = this.calcFarmData(gameInfo);
+          const farmData = this.calcFarmData(gameInfo, scholarshipItem);
 
           return {
             ...scholarshipItem,
@@ -205,7 +215,7 @@ export default {
       return result;
     },
 
-    calcFarmData(gameInfo) {
+    calcFarmData(gameInfo, scholarshipItem) {
       if (gameInfo.last_claimed_item_at === 0) {
         return null;
       }
@@ -217,11 +227,15 @@ export default {
       );
 
       const lastClaimedItemAt = moment(
-        new Date(gameInfo.last_claimed_item_at * 1000)
+        `${moment(gameInfo.last_claimed_item_at * 1000)
+          .toISOString()
+          .slice(0, 11)}00:00:00Z`
       );
 
-      const farmingDays = Math.abs(
-        Math.ceil(moment.duration(currentDate.diff(lastClaimedItemAt)).asDays())
+      const { minusFarmingDays = 0 } = scholarshipItem;
+
+      const farmingDays = Number(
+        lastClaimedItemAt.fromNow("d").replace(" days", "") - minusFarmingDays
       );
 
       const slpAverage =
@@ -233,6 +247,9 @@ export default {
         slpAverage,
         total,
         farmingDays,
+        last_claimed_item_at: moment(
+          gameInfo.last_claimed_item_at * 1000
+        ).toISOString(),
       };
     },
   },

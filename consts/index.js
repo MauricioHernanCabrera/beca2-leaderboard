@@ -1,3 +1,12 @@
+/**
+ * Protocolo de retiro
+ *  1. cada que se retire una cuenta si tiene minusFarmingDays quitarselo
+ *  2. tomar el snapshot antes de iniciar el dia (20:55)
+ *  3. retirar siempre despues de iniciado el dia (21:01)
+ *
+ * Prestar atencion a los retiros hasta el 15 de enero
+ */
+
 const SCHOLARSHIPS = [
   {
     name: "P0 | HERNAN",
@@ -13,7 +22,8 @@ const SCHOLARSHIPS = [
   },
   {
     name: "P3 | GASTON | BN2",
-    ronin: "ronin:5a1d45e8444ae0cc92e7d3462153bbe2ab9240ee"
+    ronin: "ronin:5a1d45e8444ae0cc92e7d3462153bbe2ab9240ee",
+    minusFarmingDays: 1
   },
   {
     name: "P4 | CANELA",
@@ -21,7 +31,8 @@ const SCHOLARSHIPS = [
   },
   {
     name: "P5 | PRISCILA | BN2",
-    ronin: "ronin:5941367a6518eaea190d3f08099959cf3a234dc0"
+    ronin: "ronin:5941367a6518eaea190d3f08099959cf3a234dc0",
+    minusFarmingDays: 1
   },
   {
     name: "P6 | DINO | BN3",
@@ -29,7 +40,8 @@ const SCHOLARSHIPS = [
   },
   {
     name: "P6 | PAPEL | BN4",
-    ronin: "ronin:6cfa7b1ee49e3a77e95eaa4ecd81c6e7575d95b9"
+    ronin: "ronin:6cfa7b1ee49e3a77e95eaa4ecd81c6e7575d95b9",
+    minusFarmingDays: 1
   },
   {
     name: "P7 | LUCAS",
@@ -37,7 +49,8 @@ const SCHOLARSHIPS = [
   },
   {
     name: "P8 | IVAN | BN2",
-    ronin: "ronin:8e06329c89c63f0accec1dc29ecf703d917f3159"
+    ronin: "ronin:8e06329c89c63f0accec1dc29ecf703d917f3159",
+    minusFarmingDays: 1
   },
   {
     name: "P9 | NAHUEL",
@@ -53,7 +66,8 @@ const SCHOLARSHIPS = [
   },
   {
     name: "P12 | GASPAR",
-    ronin: "ronin:6f3fa3cd2a34a604a0cd7df42ced5961d612468d"
+    ronin: "ronin:6f3fa3cd2a34a604a0cd7df42ced5961d612468d",
+    minusFarmingDays: 1
   },
   {
     name: "P13 | TIOURE",
@@ -61,20 +75,24 @@ const SCHOLARSHIPS = [
   },
   {
     name: "P14 | EMILIO",
-    ronin: "ronin:dc021f5a2502b89685bf94c3002b9e953a2cdd14"
+    ronin: "ronin:dc021f5a2502b89685bf94c3002b9e953a2cdd14",
+    minusFarmingDays: 1
   },
   {
     name: "P15 | HERNAN FLORES",
     ronin: "ronin:4a077a038a74f8f63be683d856fdcd3af7a284d5"
+    // solo empezo tarde
   },
   {
     name: "P16 | SOL",
-    ronin: "ronin:ec7cf999cc37c3068cd0be378b320d932cf1beda"
+    ronin: "ronin:ec7cf999cc37c3068cd0be378b320d932cf1beda",
+    minusFarmingDays: 1
   },
   {
     name: "P17 | SARA",
     ronin: "ronin:0b1a12251566d37897e903c6e1660eabd9387be1"
-  },
+    // solo empezo tarde
+  }
 ];
 
 export { SCHOLARSHIPS };

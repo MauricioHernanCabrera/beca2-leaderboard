@@ -3,7 +3,7 @@
   "version": "1.8.4",
   "private": true,
   "scripts": {
-    "dev": "nuxt --port=3333",
+    "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate && npm run cache:clean",
