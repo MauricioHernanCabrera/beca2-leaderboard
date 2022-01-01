@@ -9,19 +9,14 @@
     ></v-img>
 
     <div class="ranking__amount" v-else>
-      #{{ value }}
+      {{ value ? `#${value}` : "-" }}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    value: {
-      type: Number,
-      required: true,
-    },
-  },
+  props: ["value"],
 };
 </script>
 

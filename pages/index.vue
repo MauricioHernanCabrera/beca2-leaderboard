@@ -1,13 +1,32 @@
 <template>
   <div class="home">
-    <div class="home__container custom_container custom_container--lg">
+    <div class="home__container custom_container custom_container_xxl">
       <h1 class="home__title">Top Beca2</h1>
 
+      <v-row>
+        <v-col cols="12" md="4">
+          <!-- <v-select
+            :items="infoItems"
+            label="Cantidad de información"
+            v-model="filters.info"
+            outlined
+          ></v-select> -->
+
+          <v-select
+            :items="infoItems"
+            label="Cantidad de información"
+            v-model="filters.info"
+            outlined
+          ></v-select>
+        </v-col>
+      </v-row>
+
       <v-data-table
-        :headers="headers"
+        :headers="headersFiltered"
         :items="scholarshipsPopulated"
         :items-per-page="-1"
         :loading="isLoading"
+        loading-text="Cargando datos de las becas"
         hide-default-footer
         mobile-breakpoint="0"
         class="elevation-1"
@@ -24,7 +43,7 @@
         </template>
 
         <template v-slot:item.ranking="{ item }">
-          <CardRanking :value="item.ranking" />
+          <CardRanking :value="item.ranking === 99999 ? null : item.ranking" />
         </template>
 
         <template v-slot:item.elo="{ item }">
@@ -33,6 +52,22 @@
 
         <template v-slot:item.slpAverage="{ item }">
           <CardSlp :value="item.slpAverage" />
+        </template>
+
+        <template v-slot:item.percentageScholarship="{ item }">
+          <CardPercentage :value="item.percentageScholarship" />
+        </template>
+
+        <template v-slot:item.percentageManager="{ item }">
+          <CardPercentage :value="item.percentageManager" />
+        </template>
+
+        <template v-slot:item.slpScholarship="{ item }">
+          <CardSlp :value="item.slpScholarship" />
+        </template>
+
+        <template v-slot:item.slpManager="{ item }">
+          <CardSlp :value="item.slpManager" />
         </template>
 
         <template v-slot:item.total="{ item }">
@@ -44,7 +79,10 @@
         </template>
 
         <template v-slot:item.team="{ item }">
-          <div class="team" v-if="item.team.length > 0">
+          <div
+            class="team"
+            v-if="item.team.length > 0 && item.status == 'active'"
+          >
             <a
               class="axie_item"
               v-for="axieItem in item.team"
@@ -76,6 +114,7 @@ import { retry, promiseChunk } from "@/lib/utils";
 import { GET_AXIES_OWNER } from "@/graphql";
 
 import CardSlp from "@/components/Shared/CardSlp";
+import CardPercentage from "@/components/Shared/CardPercentage";
 import CardCups from "@/components/Shared/CardCups";
 import CardRanking from "@/components/Shared/CardRanking";
 import CardFarmingDays from "@/components/Shared/CardFarmingDays";
@@ -87,6 +126,7 @@ export default {
 
   components: {
     CardSlp,
+    CardPercentage,
     CardCups,
     CardRanking,
     CardFarmingDays,
@@ -94,46 +134,33 @@ export default {
 
   data() {
     return {
-      isLoading: true,
+      filters: {
+        info: "basic",
+      },
 
-      headers: [
+      infoItems: [
         {
-          text: "Ranking",
-          value: "ranking",
+          text: "Basica",
+          value: "basic",
         },
         {
-          text: "Becado",
-          sortable: false,
-          value: "name",
-        },
-        {
-          text: "Copas",
-          value: "elo",
-        },
-        {
-          text: "SLP Promedio",
-          value: "slpAverage",
-        },
-        {
-          text: "SLP Total",
-          value: "total",
-        },
-        {
-          text: "Días de farmeo",
-          value: "farmingDays",
-        },
-        {
-          text: "Equipo",
-          sortable: false,
-          value: "team",
+          text: "Avanzada",
+          value: "advanced",
         },
       ],
+
+      isLoading: true,
+
+      isAdmin: false,
 
       scholarships: [],
     };
   },
 
   async mounted() {
+    const { isAdmin = 0 } = this.$route.query;
+    this.isAdmin = Boolean(Number(isAdmin));
+
     try {
       this.scholarships = await this.getScholarInfo(SCHOLARSHIPS);
     } catch (error) {
@@ -145,8 +172,9 @@ export default {
     scholarshipsRankingMap() {
       return this.scholarships
         .slice()
+        .filter((item) => item.status === "active")
         .sort((dataA, dataB) => dataB.elo - dataA.elo)
-        .map(({ ronin }) => ronin)
+        .map(({ name }) => name)
         .reduce(
           (prev, current, index) => ({
             ...prev,
@@ -159,8 +187,108 @@ export default {
     scholarshipsPopulated() {
       return this.scholarships.map((scholarshipItem) => ({
         ...scholarshipItem,
-        ranking: this.scholarshipsRankingMap[scholarshipItem.ronin] || null,
+        ranking:
+          scholarshipItem.status === "active"
+            ? this.scholarshipsRankingMap[scholarshipItem.name] || 99999
+            : 99999,
       }));
+    },
+
+    headersFiltered() {
+      const { info } = this.filters;
+
+      switch (info) {
+        case "basic": {
+          return [
+            {
+              text: "Ranking",
+              value: "ranking",
+            },
+            {
+              text: "Becado",
+              sortable: false,
+              value: "name",
+            },
+            {
+              text: "Copas",
+              value: "elo",
+            },
+            {
+              text: "SLP Promedio",
+              value: "slpAverage",
+            },
+            {
+              text: "SLP Total",
+              value: "total",
+            },
+            {
+              text: "Días de farmeo",
+              value: "farmingDays",
+            },
+            {
+              text: "Equipo",
+              sortable: false,
+              value: "team",
+            },
+          ];
+        }
+
+        case "advanced": {
+          return [
+            {
+              text: "Ranking",
+              value: "ranking",
+            },
+            {
+              text: "Becado",
+              sortable: false,
+              value: "name",
+            },
+            {
+              text: "Copas",
+              value: "elo",
+            },
+            {
+              text: "SLP Promedio",
+              value: "slpAverage",
+            },
+
+            {
+              text: "Porcentaje Becado",
+              value: "percentageScholarship",
+            },
+            {
+              text: "Porcentaje Manager",
+              value: "percentageManager",
+            },
+
+            {
+              text: "SLP Becado",
+              value: "slpScholarship",
+            },
+            {
+              text: "SLP Manager",
+              value: "slpManager",
+            },
+            {
+              text: "SLP Total",
+              value: "total",
+            },
+            {
+              text: "Días de farmeo",
+              value: "farmingDays",
+            },
+            {
+              text: "Equipo",
+              sortable: false,
+              value: "team",
+            },
+          ];
+        }
+
+        default:
+          [];
+      }
     },
   },
 
@@ -198,8 +326,8 @@ export default {
 
           return {
             ...scholarshipItem,
-            elo: leaderboard.elo,
             ...farmData,
+            elo: scholarshipItem.elo ? scholarshipItem.elo : leaderboard.elo,
             profileUrl: `https://marketplace.axieinfinity.com/profile/${scholarshipItem.ronin}/axie/`,
             team: teamInfo.data.axies.results.map((axieItem) => ({
               ...axieItem,
@@ -215,15 +343,52 @@ export default {
       return result;
     },
 
+    calcSlpByOwnership(scholarshipItem, { total, slpAverage }) {
+      if (scholarshipItem.isMine) {
+        return {
+          percentageManager: 100,
+          percentageScholarship: 0,
+          slpManager: total,
+          slpScholarship: 0,
+        };
+      }
+
+      if (slpAverage >= 135) {
+        return {
+          percentageManager: 50,
+          percentageScholarship: 50,
+          slpManager: total * 0.5,
+          slpScholarship: total * 0.5,
+        };
+      } else if (slpAverage >= 105) {
+        return {
+          percentageManager: 60,
+          percentageScholarship: 40,
+          slpManager: total * 0.6,
+          slpScholarship: total * 0.4,
+        };
+      } else {
+        return {
+          percentageManager: 70,
+          percentageScholarship: 30,
+          slpManager: total * 0.7,
+          slpScholarship: total * 0.3,
+        };
+      }
+    },
+
     calcFarmData(gameInfo, scholarshipItem) {
       if (gameInfo.last_claimed_item_at === 0) {
         return null;
       }
 
-      const total = gameInfo.total - gameInfo.claimable_total;
+      const { minusTotal = 0 } = scholarshipItem;
+
+      const total = scholarshipItem.total
+        ? scholarshipItem.total
+        : gameInfo.total - gameInfo.claimable_total - minusTotal;
 
       const currentDate = moment();
-      // new Date(`${new Date().toISOString().slice(0, 11)}00:00:00Z`)
 
       const lastClaimedItemAt = moment(
         `${moment(gameInfo.last_claimed_item_at * 1000)
@@ -231,12 +396,14 @@ export default {
           .slice(0, 11)}00:00:00Z`
       );
 
-      const { minusFarmingDays = 0 } = scholarshipItem;
+      const { minusFarmingDays = 0, farmingDays: farmingDaysAux } =
+        scholarshipItem;
 
-      const farmingDays =
-        Math.ceil(
-          moment.duration(currentDate.diff(lastClaimedItemAt)).asDays()
-        ) - minusFarmingDays;
+      let farmingDays = farmingDaysAux
+        ? farmingDaysAux
+        : Math.ceil(
+            moment.duration(currentDate.diff(lastClaimedItemAt)).asDays()
+          ) - minusFarmingDays;
 
       const slpAverage =
         farmingDays === 0 || total === 0
@@ -247,6 +414,7 @@ export default {
         slpAverage,
         total,
         farmingDays,
+        ...this.calcSlpByOwnership(scholarshipItem, { total, slpAverage }),
       };
     },
   },
