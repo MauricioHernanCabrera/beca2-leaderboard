@@ -7,91 +7,145 @@
  * Prestar atencion a los retiros hasta el 15 de enero
  */
 
+const GROUP_MAP = {
+  DEFINITIVE: "DEFINITIVE",
+  INITIAL: "INITIAL",
+  TRANSITION: "TRANSITION"
+};
+
+const ROUTES = {
+  SLP_AMOUNT:
+    "https://game-api.skymavis.com/game-api/clients/_ADDRESS_/items/1",
+  CRYPTO_PRICE:
+    "https://min-api.cryptocompare.com/data/price?fsym=_FROM_&tsyms=_TO_"
+};
+
 const SCHOLARSHIPS = [
   {
     name: "P0 | HERNAN",
-    ronin: "ronin:6291358c0cc12b0d423fa376e0e541db3222458d"
+    ronin: "ronin:6291358c0cc12b0d423fa376e0e541db3222458d",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "mine"
   },
   {
     name: "P1 | GUIDO",
-    ronin: "ronin:2418edadadf5dc9ee56f0060eba3ae4756326872"
+    ronin: "ronin:2418edadadf5dc9ee56f0060eba3ae4756326872",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship"
   },
   {
     name: "P2 | MILI",
-    ronin: "ronin:91731b481cc449a27cb017de028d51708338515e"
+    ronin: "ronin:91731b481cc449a27cb017de028d51708338515e",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship"
   },
   {
     name: "P3 | GASTON | BN2",
     ronin: "ronin:5a1d45e8444ae0cc92e7d3462153bbe2ab9240ee",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship",
     minusFarmingDays: 1
   },
   {
     name: "P4 | CANELA",
-    ronin: "ronin:40f3e1bb7b83702e21b6d5808487f7fc6f8fbde6"
+    ronin: "ronin:40f3e1bb7b83702e21b6d5808487f7fc6f8fbde6",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship"
   },
   {
     name: "P5 | PRISCILA | BN2",
     ronin: "ronin:5941367a6518eaea190d3f08099959cf3a234dc0",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship",
     minusFarmingDays: 1
   },
+  // p6 ------------------
   {
     name: "P6 | DINO | BN3",
-    ronin: "ronin:ababd5724014ada2d124388faaa7700fef9e17b4"
+    ronin: "ronin:ababd5724014ada2d124388faaa7700fef9e17b4",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship",
+    closeDate: "2021-12-27T00:00:00.00Z"
   },
   {
     name: "P6 | PAPEL | BN4",
     ronin: "ronin:6cfa7b1ee49e3a77e95eaa4ecd81c6e7575d95b9",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship",
     minusFarmingDays: 1
   },
+  // p6 ------------------
   {
-    name: "P7 | LUCAS",
-    ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615"
+    name: "P7 | -",
+    ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship",
+    // minusFarmingDays: 2
   },
   {
     name: "P8 | IVAN | BN2",
     ronin: "ronin:8e06329c89c63f0accec1dc29ecf703d917f3159",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship",
     minusFarmingDays: 1
   },
   {
     name: "P9 | NAHUEL",
-    ronin: "ronin:7b28dc6a18e1ae63c4aa6ba24397d5a094a5ca52"
+    ronin: "ronin:7b28dc6a18e1ae63c4aa6ba24397d5a094a5ca52",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship"
   },
   {
     name: "P10 | JOSE",
-    ronin: "ronin:b9aab9b714ff4dd690875b9770680707a882771f"
+    ronin: "ronin:b9aab9b714ff4dd690875b9770680707a882771f",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship"
   },
   {
     name: "P11 | MARCOS | BN3",
-    ronin: "ronin:60a3b3996338cd5b54e032d0229bf1202a271ecd"
+    ronin: "ronin:60a3b3996338cd5b54e032d0229bf1202a271ecd",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship"
   },
   {
     name: "P12 | GASPAR",
     ronin: "ronin:6f3fa3cd2a34a604a0cd7df42ced5961d612468d",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship",
     minusFarmingDays: 1
   },
   {
     name: "P13 | TIOURE",
-    ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748"
+    ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship"
   },
   {
     name: "P14 | EMILIO",
     ronin: "ronin:dc021f5a2502b89685bf94c3002b9e953a2cdd14",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship",
     minusFarmingDays: 1
   },
   {
     name: "P15 | HERNAN FLORES",
-    ronin: "ronin:4a077a038a74f8f63be683d856fdcd3af7a284d5"
-    // solo empezo tarde
+    ronin: "ronin:4a077a038a74f8f63be683d856fdcd3af7a284d5",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship"
   },
   {
     name: "P16 | SOL",
     ronin: "ronin:ec7cf999cc37c3068cd0be378b320d932cf1beda",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship",
     minusFarmingDays: 1
+    // falta descontarle 1 dia
   },
   {
     name: "P17 | SARA",
-    ronin: "ronin:0b1a12251566d37897e903c6e1660eabd9387be1"
-    // solo empezo tarde
+    ronin: "ronin:0b1a12251566d37897e903c6e1660eabd9387be1",
+    group: GROUP_MAP["DEFINITIVE"],
+    ownership: "scholarship"
   }
 ];
 

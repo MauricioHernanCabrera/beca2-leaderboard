@@ -222,9 +222,8 @@ export default {
 
       const total = gameInfo.total - gameInfo.claimable_total;
 
-      const currentDate = moment(
-        new Date(`${new Date().toISOString().slice(0, 11)}00:00:00Z`)
-      );
+      const currentDate = moment();
+      // new Date(`${new Date().toISOString().slice(0, 11)}00:00:00Z`)
 
       const lastClaimedItemAt = moment(
         `${moment(gameInfo.last_claimed_item_at * 1000)
@@ -234,9 +233,10 @@ export default {
 
       const { minusFarmingDays = 0 } = scholarshipItem;
 
-      const farmingDays = Number(
-        lastClaimedItemAt.fromNow("d").replace(" days", "") - minusFarmingDays
-      );
+      const farmingDays =
+        Math.ceil(
+          moment.duration(currentDate.diff(lastClaimedItemAt)).asDays()
+        ) - minusFarmingDays;
 
       const slpAverage =
         farmingDays === 0 || total === 0
@@ -247,9 +247,6 @@ export default {
         slpAverage,
         total,
         farmingDays,
-        last_claimed_item_at: moment(
-          gameInfo.last_claimed_item_at * 1000
-        ).toISOString(),
       };
     },
   },
