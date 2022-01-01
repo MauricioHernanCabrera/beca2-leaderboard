@@ -70,7 +70,6 @@ const SCHOLARSHIPS = [
     elo: 1256,
     status: "inactive"
   },
-
   {
     name: "P8 | IVAN | BN2",
     ronin: "ronin:8e06329c89c63f0accec1dc29ecf703d917f3159",

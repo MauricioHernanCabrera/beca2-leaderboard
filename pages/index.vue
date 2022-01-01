@@ -1,7 +1,20 @@
 <template>
   <div class="home">
     <div class="home__container custom_container custom_container_xxl">
-      <h1 class="home__title">Top Beca2</h1>
+      <div class="home__header">
+        <h1 class="home__title">Top Beca2</h1>
+
+        <div class="home__items" v-if="isAdmin">
+          <v-btn
+            outlined
+            class="text-none"
+            @click="downloadCSV"
+            :disabled="isLoading"
+          >
+            Generar CSV
+          </v-btn>
+        </div>
+      </div>
 
       <v-row>
         <v-col cols="12" md="4">
@@ -107,6 +120,7 @@
 
 <script>
 import moment from "moment";
+import { omit } from "lodash";
 
 import { SCHOLARSHIPS } from "@/consts";
 import formatMoney from "@/lib/format-money";
@@ -293,6 +307,102 @@ export default {
   },
 
   methods: {
+    calcIsClaimDay(gameInfo) {
+      const currentDate = moment();
+
+      const lastClaimedItemAt = moment(
+        `${moment(gameInfo.last_claimed_item_at * 1000)
+          .toISOString()
+          .slice(0, 11)}00:00:00Z`
+      );
+
+      let farmingDays = Math.ceil(
+        moment.duration(currentDate.diff(lastClaimedItemAt)).asDays()
+      );
+
+      return farmingDays >= 15;
+    },
+
+    downloadCSV() {
+      const infoAux = this.filters.info;
+
+      this.filters.info = "advanced";
+
+      const headers = [
+        "ronin",
+        ...this.headersFiltered
+          .map(({ value }) => value)
+          .filter((key) => !["ranking", "team"].includes(key)),
+      ];
+
+      const scholarsFiltered = this.scholarshipsPopulated.filter(
+        ({ isClaimDay }) => isClaimDay
+      );
+
+      if (scholarsFiltered.length === 0) {
+        alert("No hay becas para reclamar");
+        return;
+      }
+
+      const data = scholarsFiltered.map((scholarshipItem) =>
+        headers.map((key) => {
+          if (["slpAverage", "slpManager", "slpScholarship"].includes(key)) {
+            return scholarshipItem[key].toFixed(2);
+          }
+
+          return scholarshipItem[key];
+        })
+      );
+
+      this.exportToCsv(
+        `claim-info-${moment(Date.now()).format("YYYY-MM-DD HH-mm-ss")}.csv`,
+        [headers, ...data]
+      );
+
+      this.filters.info = infoAux;
+    },
+
+    exportToCsv(filename, rows) {
+      var processRow = function (row) {
+        var finalVal = "";
+        for (var j = 0; j < row.length; j++) {
+          var innerValue = row[j] === null ? "" : row[j].toString();
+          if (row[j] instanceof Date) {
+            innerValue = row[j].toLocaleString();
+          }
+          var result = innerValue.replace(/"/g, '""');
+          if (result.search(/("|,|\n)/g) >= 0) result = '"' + result + '"';
+          if (j > 0) finalVal += ",";
+          finalVal += result;
+        }
+        return finalVal + "\n";
+      };
+
+      var csvFile = "";
+      for (var i = 0; i < rows.length; i++) {
+        csvFile += processRow(rows[i]);
+      }
+
+      var blob = new Blob([csvFile], { type: "text/csv;charset=utf-8;" });
+      if (navigator.msSaveBlob) {
+        // IE 10+
+        navigator.msSaveBlob(blob, filename);
+      } else {
+        var link = document.createElement("a");
+        if (link.download !== undefined) {
+          // feature detection
+          // Browsers that support HTML5 download attribute
+          var url = URL.createObjectURL(blob);
+          link.setAttribute("href", url);
+          link.setAttribute("download", filename);
+          link.style.visibility = "hidden";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      }
+    },
+
     async getScholarInfo(scholars) {
       this.isLoading = true;
 
@@ -323,6 +433,7 @@ export default {
           const [, , leaderboard] = items;
 
           const farmData = this.calcFarmData(gameInfo, scholarshipItem);
+          const isClaimDay = this.calcIsClaimDay(gameInfo, scholarshipItem);
 
           return {
             ...scholarshipItem,
@@ -333,6 +444,7 @@ export default {
               ...axieItem,
               marketplaceUrl: `https://marketplace.axieinfinity.com/axie/${axieItem.id}`,
             })),
+            isClaimDay,
           };
         },
         { chunkLength: 10 }
@@ -436,8 +548,19 @@ export default {
 .home__container {
 }
 
+.home__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .home__title {
   margin-bottom: 32px;
+}
+
+.home__items {
+  display: flex;
 }
 
 .team {
