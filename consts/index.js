@@ -56,7 +56,7 @@ const SCHOLARSHIPS = [
     status: "inactive"
   },
   {
-    name: "P6 | C2 | NICO | BN5",
+    name: "P6 | C2 | NICO | BN4",
     ronin: "ronin:6cfa7b1ee49e3a77e95eaa4ecd81c6e7575d95b9",
     minusFarmingDays: 5,
     minusTotal: 80,
@@ -69,6 +69,13 @@ const SCHOLARSHIPS = [
     total: 41,
     elo: 1256,
     status: "inactive"
+  },
+  {
+    name: "P7 | C2 | TONY",
+    ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
+    minusFarmingDays: 3,
+    minusTotal: 41,
+    status: "active"
   },
   {
     name: "P8 | IVAN | BN2",
