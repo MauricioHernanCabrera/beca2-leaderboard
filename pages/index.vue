@@ -18,13 +18,18 @@
 
       <v-row>
         <v-col cols="12" md="4">
-          <!-- <v-select
-            :items="infoItems"
-            label="Cantidad de información"
-            v-model="filters.info"
+          <v-select
+            :items="groups"
+            label="Grupo"
+            v-model="filters.group"
             outlined
-          ></v-select> -->
+            clearable
+            :loading="isLoading"
+            :disabled="isLoading"
+          ></v-select>
+        </v-col>
 
+        <v-col cols="12" md="4">
           <v-select
             :items="infoItems"
             label="Cantidad de información"
@@ -36,7 +41,7 @@
 
       <v-data-table
         :headers="headersFiltered"
-        :items="scholarshipsPopulated"
+        :items="scholarshipsFiltered"
         :items-per-page="-1"
         :loading="isLoading"
         loading-text="Cargando datos de las becas"
@@ -71,6 +76,10 @@
           <CardPercentage :value="item.percentageScholarship" />
         </template>
 
+        <template v-slot:item.claimDate="{ item }">
+          <CardPayDate :value="item.claimDateText" />
+        </template>
+
         <template v-slot:item.percentageManager="{ item }">
           <CardPercentage :value="item.percentageManager" />
         </template>
@@ -91,7 +100,7 @@
           <CardFarmingDays :value="item.farmingDays" />
         </template>
 
-        <template v-slot:item.team="{ item }">
+        <template v-slot:item.group="{ item }">
           <div
             class="team"
             v-if="item.team.length > 0 && item.status == 'active'"
@@ -111,6 +120,7 @@
               ></v-img>
             </a>
           </div>
+
           <span v-else>-</span>
         </template>
       </v-data-table>
@@ -132,9 +142,12 @@ import CardPercentage from "@/components/Shared/CardPercentage";
 import CardCups from "@/components/Shared/CardCups";
 import CardRanking from "@/components/Shared/CardRanking";
 import CardFarmingDays from "@/components/Shared/CardFarmingDays";
+import CardPayDate from "@/components/Shared/CardPayDate";
 
 export default {
   name: "Home",
+
+  loading: false,
 
   mixins: [],
 
@@ -144,12 +157,14 @@ export default {
     CardCups,
     CardRanking,
     CardFarmingDays,
+    CardPayDate,
   },
 
   data() {
     return {
       filters: {
         info: "basic",
+        group: null,
       },
 
       infoItems: [
@@ -183,6 +198,28 @@ export default {
   },
 
   computed: {
+    scholarshipsFiltered() {
+      let items = this.scholarshipsPopulated;
+
+      const { group } = this.filters;
+
+      if (group) {
+        items = items.filter((item) => item.group === group);
+      }
+
+      return items;
+    },
+
+    groups() {
+      return [
+        ...new Set(
+          this.scholarshipsPopulated
+            .map(({ group }) => group)
+            .filter((item) => !!item)
+        ),
+      ].sort();
+    },
+
     scholarshipsRankingMap() {
       return this.scholarships
         .slice()
@@ -240,9 +277,12 @@ export default {
               value: "farmingDays",
             },
             {
+              text: "Día de pago",
+              value: "claimDate",
+            },
+            {
               text: "Equipo",
-              sortable: false,
-              value: "team",
+              value: "group",
             },
           ];
         }
@@ -257,6 +297,10 @@ export default {
               text: "Becado",
               sortable: false,
               value: "name",
+            },
+            {
+              text: "Día de pago",
+              value: "claimDate",
             },
             {
               text: "Copas",
@@ -293,9 +337,12 @@ export default {
               value: "farmingDays",
             },
             {
+              text: "Día de pago",
+              value: "claimDate",
+            },
+            {
               text: "Equipo",
-              sortable: false,
-              value: "team",
+              value: "group",
             },
           ];
         }
@@ -307,14 +354,8 @@ export default {
   },
 
   methods: {
-    calcIsClaimDay(gameInfo) {
+    calcIsClaimDay(lastClaimedItemAt) {
       const currentDate = moment();
-
-      const lastClaimedItemAt = moment(
-        `${moment(gameInfo.last_claimed_item_at * 1000)
-          .toISOString()
-          .slice(0, 11)}00:00:00Z`
-      );
 
       let farmingDays = Math.ceil(
         moment.duration(currentDate.diff(lastClaimedItemAt)).asDays()
@@ -332,7 +373,7 @@ export default {
         "ronin",
         ...this.headersFiltered
           .map(({ value }) => value)
-          .filter((key) => !["ranking", "team"].includes(key)),
+          .filter((key) => !["ranking", "group"].includes(key)),
       ];
 
       const scholarsFiltered = this.scholarshipsPopulated.filter(
@@ -433,7 +474,18 @@ export default {
           const [, , leaderboard] = items;
 
           const farmData = this.calcFarmData(gameInfo, scholarshipItem);
-          const isClaimDay = this.calcIsClaimDay(gameInfo, scholarshipItem);
+
+          const lastClaimedItemAt = scholarshipItem.lastClaimedItemAt
+            ? moment(scholarshipItem.lastClaimedItemAt)
+            : moment(
+                `${moment(gameInfo.last_claimed_item_at * 1000)
+                  .toISOString()
+                  .slice(0, 11)}00:00:00Z`
+              );
+
+          const claimDate = lastClaimedItemAt.add(15, "days");
+
+          const isClaimDay = this.calcIsClaimDay(lastClaimedItemAt);
 
           return {
             ...scholarshipItem,
@@ -445,6 +497,8 @@ export default {
               marketplaceUrl: `https://marketplace.axieinfinity.com/axie/${axieItem.id}`,
             })),
             isClaimDay,
+            claimDate: claimDate.toDate().getTime(),
+            claimDateText: claimDate.format("DD/MM"),
           };
         },
         { chunkLength: 10 }
@@ -565,6 +619,7 @@ export default {
 
 .team {
   display: flex;
+  align-items: center;
   margin: 12px 0;
 }
 
