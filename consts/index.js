@@ -133,15 +133,15 @@ const SCHOLARSHIPS = [
   {
     name: "P13 | C2 | JUNIOR",
     ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748",
-    status: "active",
+    status: "inactive",
     farmingDays: 1,
     total: 6
   },
-  {
-    name: "P13 | C3 | PENDIENTE",
-    ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748",
-    status: "inactive"
-  },
+  // {
+  //   name: "P13 | C3 | PENDIENTE",
+  //   ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748",
+  //   status: "inactive"
+  // },
   {
     name: "P14 | EMILIO",
     ronin: "ronin:dc021f5a2502b89685bf94c3002b9e953a2cdd14",

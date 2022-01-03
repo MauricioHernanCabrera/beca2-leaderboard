@@ -187,8 +187,12 @@ export default {
   },
 
   async mounted() {
-    const { isAdmin = 0 } = this.$route.query;
+    const { isAdmin = 0, group = null } = this.$route.query;
     this.isAdmin = Boolean(Number(isAdmin));
+
+    if (group) {
+      this.filters.group = group;
+    }
 
     try {
       this.scholarships = await this.getScholarInfo(SCHOLARSHIPS);
@@ -299,10 +303,6 @@ export default {
               value: "name",
             },
             {
-              text: "Día de pago",
-              value: "claimDate",
-            },
-            {
               text: "Copas",
               value: "elo",
             },
@@ -316,17 +316,8 @@ export default {
               value: "percentageScholarship",
             },
             {
-              text: "Porcentaje Manager",
-              value: "percentageManager",
-            },
-
-            {
               text: "SLP Becado",
               value: "slpScholarship",
-            },
-            {
-              text: "SLP Manager",
-              value: "slpManager",
             },
             {
               text: "SLP Total",
