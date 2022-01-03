@@ -105,9 +105,19 @@ const SCHOLARSHIPS = [
     status: "active"
   },
   {
-    name: "P13 | TIOURE",
+    name: "P13 | C1 | TIOURE",
     ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748",
-    status: "active"
+    status: "inactive",
+    farmingDays: 2,
+    total: 0,
+    elo: 1445,
+  },
+  {
+    name: "P13 | C2 | JUNIOR",
+    ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748",
+    status: "active",
+    minusFarmingDays: 2,
+    minusTotal: 0,
   },
   {
     name: "P14 | EMILIO",
