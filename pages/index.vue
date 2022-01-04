@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="home__container custom_container custom_container_xxl">
+    <div class="home__container custom_container custom_container_fluid">
       <div class="home__header">
         <h1 class="home__title">Top Beca2</h1>
 
@@ -87,15 +87,6 @@
             :disabled="isLoading"
           ></v-select>
         </v-col>
-
-        <v-col cols="12" md="4">
-          <v-select
-            :items="infoItems"
-            label="Cantidad de información"
-            v-model="filters.info"
-            outlined
-          ></v-select>
-        </v-col>
       </v-row>
 
       <v-data-table
@@ -157,6 +148,15 @@
 
         <template v-slot:item.farmingDays="{ item }">
           <CardFarmingDays :value="item.farmingDays" />
+        </template>
+
+        <template v-slot:item.damageCalculator="{ item }">
+          <a
+            v-if="item.team.length >= 3"
+            :href="`https://axie-tools.fans/es/damage-calculator?axie1=${item.team[0].id}&axie2=${item.team[1].id}&axie3=${item.team[2].id}`"
+            target="_blank"
+            >Ver daño</a
+          >
         </template>
 
         <template v-slot:item.group="{ item }">
@@ -226,7 +226,6 @@ export default {
   data() {
     return {
       filters: {
-        info: "basic",
         group: null,
       },
 
@@ -246,17 +245,6 @@ export default {
         {
           text: "Total",
           value: "total",
-        },
-      ],
-
-      infoItems: [
-        {
-          text: "Basica",
-          value: "basic",
-        },
-        {
-          text: "Avanzada",
-          value: "advanced",
         },
       ],
 
@@ -444,97 +432,55 @@ export default {
     },
 
     headersScholarshipsFiltered() {
-      const { info } = this.filters;
+      return [
+        {
+          text: "Ranking",
+          value: "ranking",
+        },
+        {
+          text: "Becado",
+          sortable: false,
+          value: "name",
+        },
+        {
+          text: "Copas",
+          value: "elo",
+        },
+        {
+          text: "SLP Promedio",
+          value: "slpAverage",
+        },
 
-      switch (info) {
-        case "basic": {
-          return [
-            {
-              text: "Ranking",
-              value: "ranking",
-            },
-            {
-              text: "Becado",
-              sortable: false,
-              value: "name",
-            },
-            {
-              text: "Copas",
-              value: "elo",
-            },
-            {
-              text: "SLP Promedio",
-              value: "slpAverage",
-            },
-            {
-              text: "SLP Total",
-              value: "total",
-            },
-            {
-              text: "Días de farmeo",
-              value: "farmingDays",
-            },
-            {
-              text: "Día de pago",
-              value: "claimDate",
-            },
-            {
-              text: "Equipo",
-              value: "group",
-            },
-          ];
-        }
-
-        case "advanced": {
-          return [
-            {
-              text: "Ranking",
-              value: "ranking",
-            },
-            {
-              text: "Becado",
-              sortable: false,
-              value: "name",
-            },
-            {
-              text: "Copas",
-              value: "elo",
-            },
-            {
-              text: "SLP Promedio",
-              value: "slpAverage",
-            },
-
-            {
-              text: "Porcentaje Becado",
-              value: "percentageScholarship",
-            },
-            {
-              text: "SLP Becado",
-              value: "slpScholarship",
-            },
-            {
-              text: "SLP Total",
-              value: "total",
-            },
-            {
-              text: "Días de farmeo",
-              value: "farmingDays",
-            },
-            {
-              text: "Día de pago",
-              value: "claimDate",
-            },
-            {
-              text: "Equipo",
-              value: "group",
-            },
-          ];
-        }
-
-        default:
-          [];
-      }
+        {
+          text: "Porcentaje Becado",
+          value: "percentageScholarship",
+        },
+        {
+          text: "SLP Becado",
+          value: "slpScholarship",
+        },
+        {
+          text: "SLP Total",
+          value: "total",
+        },
+        {
+          text: "Días de farmeo",
+          value: "farmingDays",
+        },
+        {
+          text: "Día de pago",
+          value: "claimDate",
+        },
+        {
+          text: "Equipo",
+          value: "group",
+        },
+        {
+          text: "Calculadora de daño",
+          sortable: false,
+          value: "damageCalculator",
+        },
+      ];
     },
   },
 
@@ -583,15 +529,16 @@ export default {
     },
 
     downloadCSV() {
-      const infoAux = this.filters.info;
-
-      this.filters.info = "advanced";
-
       const headers = [
         "ronin",
         ...this.headersScholarshipsFiltered
           .map(({ value }) => value)
-          .filter((key) => !["ranking", "group", "claimDate"].includes(key)),
+          .filter(
+            (key) =>
+              !["ranking", "group", "claimDate", "damageCalculator"].includes(
+                key
+              )
+          ),
       ];
 
       const scholarsFiltered = this.scholarshipsPopulated.filter(
@@ -602,7 +549,6 @@ export default {
       if (scholarsFiltered.length === 0) {
         alert("No hay becas para reclamar");
 
-        this.filters.info = infoAux;
         return;
       }
 
@@ -620,8 +566,6 @@ export default {
         `claim-info-${moment(Date.now()).format("YYYY-MM-DD HH-mm-ss")}.csv`,
         [headers, ...data]
       );
-
-      this.filters.info = infoAux;
     },
 
     exportToCsv(filename, rows) {
