@@ -4,17 +4,76 @@
       <div class="home__header">
         <h1 class="home__title">Top Beca2</h1>
 
-        <div class="home__items" v-if="isAdmin">
+        <div class="home__items">
           <v-btn
             outlined
-            class="text-none"
+            class="text-none mr-4"
             @click="downloadCSV"
             :disabled="isLoading"
+            v-if="isAdmin"
           >
             Generar CSV
           </v-btn>
+
+          <v-btn
+            outlined
+            class="text-none"
+            @click="loadInitialData"
+            :disabled="isLoading"
+          >
+            Recargar datos
+          </v-btn>
         </div>
       </div>
+
+      <div class="statistics" v-if="isAdmin">
+        <CardStatistic
+          v-for="statisticItem in statistics"
+          :key="statisticItem.title"
+          v-bind="statisticItem"
+          criptoSymbol="USDT"
+        />
+      </div>
+
+      <v-data-table
+        v-if="isAdmin"
+        :headers="headersPayDays"
+        :items="payDays"
+        :items-per-page="-1"
+        :loading="isLoading"
+        loading-text="Cargando datos de los días de pago"
+        hide-default-footer
+        mobile-breakpoint="0"
+        class="elevation-1"
+        :sort-by="['ranking']"
+      >
+        <template v-slot:item.claimDate="{ item }">
+          <CardPayDate :value="item.claimDateText" />
+        </template>
+
+        <template v-slot:item.slpManager="{ item }">
+          <div class="d-flex">
+            <CardSlp :value="item.slpManager" class="mr-2" />
+            <CardUsdt :value="item.criptoManager" />
+          </div>
+        </template>
+
+        <template v-slot:item.slpScholarship="{ item }">
+          <div class="d-flex">
+            <CardSlp :value="item.slpScholarship" class="mr-2" />
+            <CardUsdt :value="item.criptoScholarship" />
+          </div>
+        </template>
+
+        <template v-slot:item.total="{ item }">
+          <div class="d-flex">
+            <CardSlp :value="item.total" class="mr-2" />
+            <CardUsdt :value="item.criptoTotal" />
+          </div>
+        </template>
+      </v-data-table>
+
+      <v-divider class="my-10" v-if="isAdmin"></v-divider>
 
       <v-row>
         <v-col cols="12" md="4">
@@ -40,7 +99,7 @@
       </v-row>
 
       <v-data-table
-        :headers="headersFiltered"
+        :headers="headersScholarshipsFiltered"
         :items="scholarshipsFiltered"
         :items-per-page="-1"
         :loading="isLoading"
@@ -137,7 +196,9 @@ import formatMoney from "@/lib/format-money";
 import { retry, promiseChunk } from "@/lib/utils";
 import { GET_AXIES_OWNER } from "@/graphql";
 
+import CardStatistic from "@/components/Shared/CardStatistic";
 import CardSlp from "@/components/Shared/CardSlp";
+import CardUsdt from "@/components/Shared/CardUsdt";
 import CardPercentage from "@/components/Shared/CardPercentage";
 import CardCups from "@/components/Shared/CardCups";
 import CardRanking from "@/components/Shared/CardRanking";
@@ -153,6 +214,8 @@ export default {
 
   components: {
     CardSlp,
+    CardUsdt,
+    CardStatistic,
     CardPercentage,
     CardCups,
     CardRanking,
@@ -166,6 +229,25 @@ export default {
         info: "basic",
         group: null,
       },
+
+      headersPayDays: [
+        {
+          text: "Día de pago",
+          value: "claimDate",
+        },
+        {
+          text: "Manager",
+          value: "slpManager",
+        },
+        {
+          text: "Becados",
+          value: "slpScholarship",
+        },
+        {
+          text: "Total",
+          value: "total",
+        },
+      ],
 
       infoItems: [
         {
@@ -182,26 +264,138 @@ export default {
 
       isAdmin: false,
 
+      slpPrice: 0,
+
       scholarships: [],
     };
   },
 
   async mounted() {
-    const { isAdmin = 0, group = null } = this.$route.query;
-    this.isAdmin = Boolean(Number(isAdmin));
-
-    if (group) {
-      this.filters.group = group;
-    }
-
-    try {
-      this.scholarships = await this.getScholarInfo(SCHOLARSHIPS);
-    } catch (error) {
-      console.log(error);
-    }
+    await this.loadInitialData();
   },
 
   computed: {
+    payDays() {
+      const payDayMap = this.scholarshipsPopulated.reduce((prev, current) => {
+        if (!prev[current.claimDate]) {
+          return {
+            ...prev,
+            [current.claimDate]: {
+              slpManager: current.slpManager,
+              slpScholarship: current.slpScholarship,
+              total: current.total,
+              claimDateText: current.claimDateText,
+              claimDate: current.claimDate,
+            },
+          };
+        }
+
+        return {
+          ...prev,
+          [current.claimDate]: {
+            ...prev[current.claimDate],
+            slpManager: prev[current.claimDate].slpManager + current.slpManager,
+            slpScholarship:
+              prev[current.claimDate].slpScholarship + current.slpScholarship,
+            total: prev[current.claimDate].total + current.total,
+          },
+        };
+      }, {});
+
+      return Object.values(payDayMap)
+        .sort((a, b) => a.claimDate - b.claimDate)
+        .map((payDayItem) => ({
+          ...payDayItem,
+          // slpManager: payDayItem.slpManager,
+          // slpScholarship: payDayItem.slpScholarship,
+          // total: payDayItem.total,
+          criptoManager: payDayItem.slpManager * this.slpPrice,
+          criptoScholarship: payDayItem.slpScholarship * this.slpPrice,
+          criptoTotal: payDayItem.total * this.slpPrice,
+        }));
+    },
+
+    averagePerScholarship() {
+      if (this.scholarshipsPopulated.length === 0) {
+        return 0;
+      }
+
+      return (
+        this.scholarshipsPopulated.reduce(
+          (prev, { slpAverage }) => prev + slpAverage,
+          0
+        ) / this.scholarshipsPopulated.length
+      );
+    },
+
+    averagePerDay() {
+      return this.scholarshipsPopulated.reduce(
+        (prev, { slpAverage }) => prev + slpAverage,
+        0
+      );
+    },
+
+    slpManager() {
+      return this.scholarshipsPopulated.reduce(
+        (prev, { slpManager }) => prev + slpManager,
+        0
+      );
+    },
+
+    slpScholarship() {
+      return this.scholarshipsPopulated.reduce(
+        (prev, { slpScholarship }) => prev + slpScholarship,
+        0
+      );
+    },
+
+    total() {
+      return this.scholarshipsPopulated.reduce(
+        (prev, { total }) => prev + total,
+        0
+      );
+    },
+
+    statistics() {
+      return [
+        {
+          title: "Manager",
+          slp: formatMoney(this.slpManager),
+          criptoPrice: this.slpPrice
+            ? formatMoney(this.slpManager * this.slpPrice)
+            : 0,
+        },
+        {
+          title: "Becados",
+          slp: formatMoney(this.slpScholarship),
+          criptoPrice: this.slpPrice
+            ? formatMoney(this.slpScholarship * this.slpPrice)
+            : 0,
+        },
+        {
+          title: "Total",
+          slp: formatMoney(this.total),
+          criptoPrice: this.slpPrice
+            ? formatMoney(this.total * this.slpPrice)
+            : 0,
+        },
+        {
+          title: "Promedio",
+          slp: formatMoney(this.averagePerDay),
+          criptoPrice: this.slpPrice
+            ? formatMoney(this.averagePerDay * this.slpPrice)
+            : 0,
+        },
+        {
+          title: "Promedio por becado",
+          slp: formatMoney(this.averagePerScholarship),
+          criptoPrice: this.slpPrice
+            ? formatMoney(this.averagePerScholarship * this.slpPrice)
+            : 0,
+        },
+      ];
+    },
+
     scholarshipsFiltered() {
       let items = this.scholarshipsPopulated;
 
@@ -249,7 +443,7 @@ export default {
       }));
     },
 
-    headersFiltered() {
+    headersScholarshipsFiltered() {
       const { info } = this.filters;
 
       switch (info) {
@@ -345,6 +539,39 @@ export default {
   },
 
   methods: {
+    async loadInitialData() {
+      this.scholarships = [];
+      this.slpPrice = 0;
+
+      const { isAdmin = 0, group = null } = this.$route.query;
+      this.isAdmin = Boolean(Number(isAdmin));
+
+      if (group) {
+        this.filters.group = group;
+      }
+
+      this.isLoading = true;
+
+      try {
+        [this.scholarships, this.slpPrice] = await Promise.all([
+          this.getScholarInfo(SCHOLARSHIPS),
+          this.getCriptoPrice("SLP", "USDT"),
+        ]);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
+    async getCriptoPrice(from, to) {
+      const data = await this.$axios.$get(
+        `https://min-api.cryptocompare.com/data/price?fsym=${from}&tsyms=${to}`
+      );
+
+      return data[to];
+    },
+
     calcIsClaimDay(lastClaimedItemAt) {
       const currentDate = moment();
 
@@ -362,17 +589,20 @@ export default {
 
       const headers = [
         "ronin",
-        ...this.headersFiltered
+        ...this.headersScholarshipsFiltered
           .map(({ value }) => value)
-          .filter((key) => !["ranking", "group"].includes(key)),
+          .filter((key) => !["ranking", "group", "claimDate"].includes(key)),
       ];
 
       const scholarsFiltered = this.scholarshipsPopulated.filter(
         ({ isClaimDay }) => isClaimDay
       );
+      // const scholarsFiltered = this.scholarshipsPopulated;
 
       if (scholarsFiltered.length === 0) {
         alert("No hay becas para reclamar");
+
+        this.filters.info = infoAux;
         return;
       }
 
@@ -436,8 +666,6 @@ export default {
     },
 
     async getScholarInfo(scholars) {
-      this.isLoading = true;
-
       const result = await promiseChunk(
         scholars,
         async (scholarshipItem) => {
@@ -619,5 +847,12 @@ export default {
 
   .axie_item__image {
   }
+}
+
+.statistics {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(0, 360px));
+  gap: 24px;
+  margin-bottom: 24px;
 }
 </style>

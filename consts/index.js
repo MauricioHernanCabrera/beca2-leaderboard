@@ -50,21 +50,20 @@ const SCHOLARSHIPS = [
     lastClaimedItemAt: "2021-12-31T00:00:00.000Z"
   },
   {
-    name: "P6 | DINO | BN3",
+    name: "P6 | BN3 | DINO",
     ronin: "ronin:ababd5724014ada2d124388faaa7700fef9e17b4",
     farmingDays: 5,
     status: "inactive"
   },
   {
-    name: "P6 | C1 | PAPEL | BN4",
+    name: "P6 | BN4 | C1 | PAPEL",
     ronin: "ronin:6cfa7b1ee49e3a77e95eaa4ecd81c6e7575d95b9",
     farmingDays: 3,
     total: 80,
-    elo: 1200,
     status: "inactive"
   },
   {
-    name: "P6 | C2 | NICO | BN4",
+    name: "P6 | BN4 | C2 | NICO",
     ronin: "ronin:6cfa7b1ee49e3a77e95eaa4ecd81c6e7575d95b9",
     minusFarmingDays: 5,
     minusTotal: 80,
@@ -76,7 +75,6 @@ const SCHOLARSHIPS = [
     ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
     farmingDays: 2,
     total: 41,
-    elo: 1256,
     status: "inactive"
   },
   {
@@ -88,7 +86,7 @@ const SCHOLARSHIPS = [
     group: "Futsal"
   },
   {
-    name: "P8 | IVAN | BN2",
+    name: "P8 | BN2 | IVAN",
     ronin: "ronin:8e06329c89c63f0accec1dc29ecf703d917f3159",
     minusFarmingDays: 1,
     status: "active",
@@ -96,9 +94,19 @@ const SCHOLARSHIPS = [
     lastClaimedItemAt: "2021-12-23T00:00:00.000Z"
   },
   {
-    name: "P9 | NAHUEL",
+    name: "P9 | C1 | NAHUEL",
+    ronin: "ronin:7b28dc6a18e1ae63c4aa6ba24397d5a094a5ca52",
+    status: "inactive",
+    farmingDays: 6,
+    total: 719,
+    group: "Termi"
+  },
+  {
+    name: "P9 | C2 | OSCAR",
     ronin: "ronin:7b28dc6a18e1ae63c4aa6ba24397d5a094a5ca52",
     status: "active",
+    minusFarmingDays: 6,
+    minusTotal: 719,
     group: "Termi"
   },
   {
@@ -108,7 +116,7 @@ const SCHOLARSHIPS = [
     group: "Unico"
   },
   {
-    name: "P11 | MARCOS | BN3",
+    name: "P11 | BN3 | MARCOS",
     ronin: "ronin:60a3b3996338cd5b54e032d0229bf1202a271ecd",
     status: "active",
     group: "Termi",
@@ -128,7 +136,6 @@ const SCHOLARSHIPS = [
     status: "inactive",
     farmingDays: 2,
     total: 0,
-    elo: 1445
   },
   {
     name: "P13 | C2 | JUNIOR",
