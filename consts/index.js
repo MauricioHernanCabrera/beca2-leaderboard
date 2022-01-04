@@ -82,7 +82,7 @@ const SCHOLARSHIPS = [
   {
     name: "P7 | C2 | TONY",
     ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
-    minusFarmingDays: 3,
+    minusFarmingDays: 5,
     minusTotal: 41,
     status: "active",
     group: "Futsal"
