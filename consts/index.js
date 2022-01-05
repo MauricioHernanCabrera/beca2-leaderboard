@@ -135,7 +135,7 @@ const SCHOLARSHIPS = [
     ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748",
     status: "inactive",
     farmingDays: 2,
-    total: 0,
+    total: 0
   },
   {
     name: "P13 | C2 | JUNIOR",
@@ -144,11 +144,14 @@ const SCHOLARSHIPS = [
     farmingDays: 1,
     total: 6
   },
-  // {
-  //   name: "P13 | C3 | PENDIENTE",
-  //   ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748",
-  //   status: "inactive"
-  // },
+  {
+    name: "P13 | C3 | MAURI FERREYRA",
+    ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748",
+    status: "active",
+    minusFarmingDays: 4,
+    minusTotal: 6,
+    group: "Bird CR7",
+  },
   {
     name: "P14 | EMILIO",
     ronin: "ronin:dc021f5a2502b89685bf94c3002b9e953a2cdd14",
@@ -161,7 +164,7 @@ const SCHOLARSHIPS = [
     name: "P15 | HERNAN FLORES",
     ronin: "ronin:4a077a038a74f8f63be683d856fdcd3af7a284d5",
     status: "active",
-    group: "Futsal",
+    group: "Futsal"
   },
   {
     name: "P16 | SOL",
