@@ -50,12 +50,6 @@ const SCHOLARSHIPS = [
     lastClaimedItemAt: "2021-12-31T00:00:00.000Z"
   },
   {
-    name: "P6 | BN3 | DINO",
-    ronin: "ronin:ababd5724014ada2d124388faaa7700fef9e17b4",
-    farmingDays: 5,
-    status: "inactive"
-  },
-  {
     name: "P6 | BN4 | C1 | PAPEL",
     ronin: "ronin:6cfa7b1ee49e3a77e95eaa4ecd81c6e7575d95b9",
     farmingDays: 3,
@@ -88,10 +82,8 @@ const SCHOLARSHIPS = [
   {
     name: "P8 | BN2 | IVAN",
     ronin: "ronin:8e06329c89c63f0accec1dc29ecf703d917f3159",
-    minusFarmingDays: 1,
     status: "active",
-    group: "Bird CR7",
-    lastClaimedItemAt: "2021-12-23T00:00:00.000Z"
+    group: "Bird CR7"
   },
   {
     name: "P9 | C1 | NAHUEL",
@@ -105,7 +97,7 @@ const SCHOLARSHIPS = [
     name: "P9 | C2 | OSCAR",
     ronin: "ronin:7b28dc6a18e1ae63c4aa6ba24397d5a094a5ca52",
     status: "active",
-    minusFarmingDays: 6,
+    minusFarmingDays: 8,
     minusTotal: 719,
     group: "Termi"
   },
@@ -150,15 +142,13 @@ const SCHOLARSHIPS = [
     status: "active",
     minusFarmingDays: 4,
     minusTotal: 6,
-    group: "Bird CR7",
+    group: "Bird CR7"
   },
   {
-    name: "P14 | EMILIO",
+    name: "P14 | LUIS FERREYRA", //
     ronin: "ronin:dc021f5a2502b89685bf94c3002b9e953a2cdd14",
-    minusFarmingDays: 1,
     status: "active",
-    group: "Bird CR7",
-    lastClaimedItemAt: "2021-12-23T00:00:00.000Z"
+    group: "Bird CR7"
   },
   {
     name: "P15 | HERNAN FLORES",

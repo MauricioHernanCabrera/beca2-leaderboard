@@ -544,7 +544,6 @@ export default {
       const scholarsFiltered = this.scholarshipsPopulated.filter(
         ({ isClaimDay }) => isClaimDay
       );
-      // const scholarsFiltered = this.scholarshipsPopulated;
 
       if (scholarsFiltered.length === 0) {
         alert("No hay becas para reclamar");
@@ -646,9 +645,9 @@ export default {
                   .slice(0, 11)}00:00:00Z`
               );
 
-          const claimDate = lastClaimedItemAt.add(15, "days");
-
           const isClaimDay = this.calcIsClaimDay(lastClaimedItemAt);
+
+          const claimDate = lastClaimedItemAt.add(15, "days");
 
           return {
             ...scholarshipItem,
