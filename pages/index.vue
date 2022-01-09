@@ -712,9 +712,10 @@ export default {
 
       const { minusTotal = 0 } = scholarshipItem;
 
-      const total = scholarshipItem.total
-        ? scholarshipItem.total
-        : gameInfo.total - gameInfo.claimable_total - minusTotal;
+      const total =
+        scholarshipItem.total !== null
+          ? scholarshipItem.total
+          : gameInfo.total - gameInfo.claimable_total - minusTotal;
 
       const currentDate = moment();
 
