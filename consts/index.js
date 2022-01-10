@@ -88,17 +88,19 @@ const SCHOLARSHIPS = [
   {
     name: "P9 | C1 | NAHUEL",
     ronin: "ronin:7b28dc6a18e1ae63c4aa6ba24397d5a094a5ca52",
-    status: "inactive",
-    farmingDays: 6,
-    total: 719,
+    status: "active",
+    minusFarmingDays: 6,
+    minusTotal: 370,
+    // farmingDays: 6,
+    // total: 719,
     group: "Termi"
   },
   {
     name: "P9 | C2 | OSCAR",
     ronin: "ronin:7b28dc6a18e1ae63c4aa6ba24397d5a094a5ca52",
-    status: "active",
-    minusFarmingDays: 8,
-    minusTotal: 719,
+    status: "inactive",
+    farmingDays: 4,
+    total: 370,
     group: "Termi"
   },
   {
