@@ -713,7 +713,7 @@ export default {
       const { minusTotal = 0 } = scholarshipItem;
 
       const total =
-        scholarshipItem.total !== null
+        typeof scholarshipItem.total === "number"
           ? scholarshipItem.total
           : gameInfo.total - gameInfo.claimable_total - minusTotal;
 
@@ -770,10 +770,11 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 24px;
 }
 
 .home__title {
-  margin-bottom: 32px;
+  /* margin-bottom: 32px; */
 }
 
 .home__items {
@@ -795,8 +796,12 @@ export default {
 
 .statistics {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(0, 360px));
   gap: 24px;
   margin-bottom: 24px;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+
+  @include breakpoint(sm) {
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  }
 }
 </style>
