@@ -161,10 +161,8 @@ const SCHOLARSHIPS = [
   {
     name: "P16 | SOL",
     ronin: "ronin:ec7cf999cc37c3068cd0be378b320d932cf1beda",
-    minusFarmingDays: 1,
     status: "active",
-    group: "Futsal",
-    lastClaimedItemAt: "2021-12-27T00:00:00.000Z"
+    group: "Futsal"
   },
   {
     name: "P17 | SARA",
