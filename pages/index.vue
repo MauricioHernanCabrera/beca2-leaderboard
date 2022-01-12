@@ -734,6 +734,7 @@ export default {
             moment.duration(currentDate.diff(lastClaimedItemAt)).asDays()
           ) - minusFarmingDays;
 
+
       const slpAverage =
         farmingDays === 0 || total === 0
           ? 0

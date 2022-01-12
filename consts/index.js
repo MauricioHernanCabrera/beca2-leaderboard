@@ -114,7 +114,8 @@ const SCHOLARSHIPS = [
     ronin: "ronin:60a3b3996338cd5b54e032d0229bf1202a271ecd",
     status: "active",
     group: "Termi",
-    lastClaimedItemAt: "2021-12-29T00:00:00.000Z"
+    lastClaimedItemAt: "2021-12-29T00:00:00.000Z",
+    minusFarmingDays: 1,
   },
   {
     name: "P12 | GASPAR",
