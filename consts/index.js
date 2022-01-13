@@ -50,17 +50,8 @@ const SCHOLARSHIPS = [
     lastClaimedItemAt: "2021-12-31T00:00:00.000Z"
   },
   {
-    name: "P6 | BN4 | C1 | PAPEL",
-    ronin: "ronin:6cfa7b1ee49e3a77e95eaa4ecd81c6e7575d95b9",
-    farmingDays: 3,
-    total: 80,
-    status: "inactive"
-  },
-  {
     name: "P6 | BN4 | C2 | NICO",
     ronin: "ronin:6cfa7b1ee49e3a77e95eaa4ecd81c6e7575d95b9",
-    minusFarmingDays: 5,
-    minusTotal: 80,
     status: "active",
     group: "Termi"
   },
@@ -114,8 +105,6 @@ const SCHOLARSHIPS = [
     ronin: "ronin:60a3b3996338cd5b54e032d0229bf1202a271ecd",
     status: "active",
     group: "Termi",
-    lastClaimedItemAt: "2021-12-29T00:00:00.000Z",
-    minusFarmingDays: 1,
   },
   {
     name: "P12 | GASPAR",
