@@ -56,17 +56,8 @@ const SCHOLARSHIPS = [
     group: "Termi"
   },
   {
-    name: "P7 | C1 | LUCAS",
+    name: "P7 | TONY",
     ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
-    farmingDays: 2,
-    total: 41,
-    status: "inactive"
-  },
-  {
-    name: "P7 | C2 | TONY",
-    ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
-    minusFarmingDays: 5,
-    minusTotal: 41,
     status: "active",
     group: "Futsal"
   },
@@ -77,21 +68,9 @@ const SCHOLARSHIPS = [
     group: "Bird CR7"
   },
   {
-    name: "P9 | C1 | NAHUEL",
+    name: "P9 | NAHUEL",
     ronin: "ronin:7b28dc6a18e1ae63c4aa6ba24397d5a094a5ca52",
     status: "active",
-    minusFarmingDays: 6,
-    minusTotal: 370,
-    // farmingDays: 6,
-    // total: 719,
-    group: "Termi"
-  },
-  {
-    name: "P9 | C2 | OSCAR",
-    ronin: "ronin:7b28dc6a18e1ae63c4aa6ba24397d5a094a5ca52",
-    status: "inactive",
-    farmingDays: 4,
-    total: 370,
     group: "Termi"
   },
   {
@@ -104,7 +83,7 @@ const SCHOLARSHIPS = [
     name: "P11 | BN3 | MARCOS",
     ronin: "ronin:60a3b3996338cd5b54e032d0229bf1202a271ecd",
     status: "active",
-    group: "Termi",
+    group: "Termi"
   },
   {
     name: "P12 | GASPAR",
