@@ -30,10 +30,8 @@ const SCHOLARSHIPS = [
   {
     name: "P3 | GASTON | BN2",
     ronin: "ronin:5a1d45e8444ae0cc92e7d3462153bbe2ab9240ee",
-    minusFarmingDays: 1,
     status: "active",
     group: "Unico",
-    lastClaimedItemAt: "2021-12-31T00:00:00.000Z"
   },
   {
     name: "P4 | CANELA",
@@ -44,10 +42,8 @@ const SCHOLARSHIPS = [
   {
     name: "P5 | PRISCILA | BN2",
     ronin: "ronin:5941367a6518eaea190d3f08099959cf3a234dc0",
-    minusFarmingDays: 1,
     status: "active",
     group: "Termi",
-    lastClaimedItemAt: "2021-12-31T00:00:00.000Z"
   },
   {
     name: "P6 | BN4 | C2 | NICO",
@@ -88,10 +84,8 @@ const SCHOLARSHIPS = [
   {
     name: "P12 | GASPAR",
     ronin: "ronin:6f3fa3cd2a34a604a0cd7df42ced5961d612468d",
-    minusFarmingDays: 1,
     status: "active",
     group: "Bird CR7",
-    lastClaimedItemAt: "2021-12-31T00:00:00.000Z"
   },
   {
     name: "P13 | C1 | TIOURE",
