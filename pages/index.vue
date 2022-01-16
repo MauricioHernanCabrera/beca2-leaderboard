@@ -633,6 +633,8 @@ export default {
             ),
           ]);
 
+          console.log(scholarshipItem.name, gameInfo);
+
           const [, , leaderboard] = items;
 
           const farmData = this.calcFarmData(gameInfo, scholarshipItem);
@@ -733,7 +735,6 @@ export default {
         : Math.ceil(
             moment.duration(currentDate.diff(lastClaimedItemAt)).asDays()
           ) - minusFarmingDays;
-
 
       const slpAverage =
         farmingDays === 0 || total === 0

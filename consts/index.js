@@ -44,6 +44,7 @@ const SCHOLARSHIPS = [
     ronin: "ronin:5941367a6518eaea190d3f08099959cf3a234dc0",
     status: "active",
     group: "Termi",
+    minusTotal: -11
   },
   {
     name: "P6 | BN4 | C2 | NICO",
@@ -88,29 +89,14 @@ const SCHOLARSHIPS = [
     group: "Bird CR7",
   },
   {
-    name: "P13 | C1 | TIOURE",
-    ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748",
-    status: "inactive",
-    farmingDays: 2,
-    total: 0
-  },
-  {
-    name: "P13 | C2 | JUNIOR",
-    ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748",
-    status: "inactive",
-    farmingDays: 1,
-    total: 6
-  },
-  {
-    name: "P13 | C3 | MAURI FERREYRA",
+    name: "P13 | MAURI FERREYRA",
     ronin: "ronin:f3bcabf76fa75120552aba907106c6ce87782748",
     status: "active",
-    minusFarmingDays: 4,
-    minusTotal: 6,
-    group: "Bird CR7"
+    group: "Bird CR7",
+    minusTotal: -6
   },
   {
-    name: "P14 | LUIS FERREYRA", //
+    name: "P14 | LUIS FERREYRA",
     ronin: "ronin:dc021f5a2502b89685bf94c3002b9e953a2cdd14",
     status: "active",
     group: "Bird CR7"
