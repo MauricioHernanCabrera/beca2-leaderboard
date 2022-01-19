@@ -8,13 +8,13 @@
  */
 
 const SCHOLARSHIPS = [
-  {
-    name: "P0 | HERNAN",
-    ronin: "ronin:6291358c0cc12b0d423fa376e0e541db3222458d",
-    isMine: true,
-    status: "active",
-    group: "PlBePa"
-  },
+  // {
+  //   name: "P0 | HERNAN",
+  //   ronin: "ronin:6291358c0cc12b0d423fa376e0e541db3222458d",
+  //   isMine: true,
+  //   status: "active",
+  //   group: "PlBePa"
+  // },
   {
     name: "P1 | GUIDO",
     ronin: "ronin:2418edadadf5dc9ee56f0060eba3ae4756326872",
