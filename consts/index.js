@@ -8,13 +8,6 @@
  */
 
 const SCHOLARSHIPS = [
-  // {
-  //   name: "P0 | HERNAN",
-  //   ronin: "ronin:6291358c0cc12b0d423fa376e0e541db3222458d",
-  //   isMine: true,
-  //   status: "active",
-  //   group: "PlBePa"
-  // },
   {
     name: "P1 | GUIDO",
     ronin: "ronin:2418edadadf5dc9ee56f0060eba3ae4756326872",
@@ -28,10 +21,10 @@ const SCHOLARSHIPS = [
     group: "Unico"
   },
   {
-    name: "P3 | GASTON | BN2",
+    name: "P3 | GASTON",
     ronin: "ronin:5a1d45e8444ae0cc92e7d3462153bbe2ab9240ee",
     status: "active",
-    group: "Unico",
+    group: "Unico"
   },
   {
     name: "P4 | CANELA",
@@ -40,14 +33,15 @@ const SCHOLARSHIPS = [
     group: "Unico"
   },
   {
-    name: "P5 | PRISCILA | BN2",
+    name: "P5 | PRISCILA",
     ronin: "ronin:5941367a6518eaea190d3f08099959cf3a234dc0",
-    status: "active",
+    status: "inactive",
     group: "Termi",
-    minusTotal: -11
+    total: 256,
+    farmingDays: 7
   },
   {
-    name: "P6 | BN4 | C2 | NICO",
+    name: "P6 | NICO",
     ronin: "ronin:6cfa7b1ee49e3a77e95eaa4ecd81c6e7575d95b9",
     status: "active",
     group: "Termi"
@@ -55,11 +49,13 @@ const SCHOLARSHIPS = [
   {
     name: "P7 | TONY",
     ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
-    status: "active",
-    group: "Futsal"
+    status: "inactive",
+    group: "Futsal",
+    total: 200,
+    farmingDays: 8
   },
   {
-    name: "P8 | BN2 | IVAN",
+    name: "P8 | IVAN",
     ronin: "ronin:8e06329c89c63f0accec1dc29ecf703d917f3159",
     status: "active",
     group: "Bird CR7"
@@ -77,7 +73,7 @@ const SCHOLARSHIPS = [
     group: "Unico"
   },
   {
-    name: "P11 | BN3 | MARCOS",
+    name: "P11 | MARCOS",
     ronin: "ronin:60a3b3996338cd5b54e032d0229bf1202a271ecd",
     status: "active",
     group: "Termi"
@@ -86,7 +82,7 @@ const SCHOLARSHIPS = [
     name: "P12 | GASPAR",
     ronin: "ronin:6f3fa3cd2a34a604a0cd7df42ced5961d612468d",
     status: "active",
-    group: "Bird CR7",
+    group: "Bird CR7"
   },
   {
     name: "P13 | MAURI FERREYRA",
