@@ -55,10 +55,18 @@ const SCHOLARSHIPS = [
     farmingDays: 8
   },
   {
+    name: "P7 | C2 | PRISCILA",
+    ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
+    status: "active",
+    group: "Futsal",
+    minusTotal: 247,
+    minusFarmingDays: 10
+  },
+  {
     name: "P8 | IVAN",
     ronin: "ronin:8e06329c89c63f0accec1dc29ecf703d917f3159",
     status: "active",
-    group: "Bird CR7"
+    group: "Bird CR7",
   },
   {
     name: "P9 | NAHUEL",
