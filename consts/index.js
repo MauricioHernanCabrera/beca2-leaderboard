@@ -46,21 +46,21 @@ const SCHOLARSHIPS = [
     status: "active",
     group: "Termi"
   },
-  {
-    name: "P7 | TONY",
-    ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
-    status: "inactive",
-    group: "Futsal",
-    total: 200,
-    farmingDays: 8
-  },
+  // {
+  //   name: "P7 | TONY",
+  //   ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
+  //   status: "inactive",
+  //   group: "Futsal",
+  //   total: 200,
+  //   farmingDays: 8
+  // },
   {
     name: "P7 | C2 | PRISCILA",
     ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
     status: "active",
     group: "Futsal",
-    minusTotal: 247,
-    minusFarmingDays: 10
+    // minusTotal: 247,
+    // minusFarmingDays: 10
   },
   {
     name: "P8 | IVAN",
