@@ -117,12 +117,6 @@ const SCHOLARSHIPS = [
     status: "active",
     group: "Futsal"
   },
-  {
-    name: "P17 | SARA",
-    ronin: "ronin:0b1a12251566d37897e903c6e1660eabd9387be1",
-    status: "active",
-    group: "Futsal"
-  }
 ];
 
 export { SCHOLARSHIPS };
