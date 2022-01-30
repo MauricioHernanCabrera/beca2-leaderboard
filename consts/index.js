@@ -24,7 +24,7 @@ const SCHOLARSHIPS = [
     name: "P3 | GASTON",
     ronin: "ronin:5a1d45e8444ae0cc92e7d3462153bbe2ab9240ee",
     status: "active",
-    group: "Unico"
+    group: "Unico",
   },
   {
     name: "P4 | CANELA",
@@ -33,34 +33,16 @@ const SCHOLARSHIPS = [
     group: "Unico"
   },
   {
-    name: "P5 | PRISCILA",
-    ronin: "ronin:5941367a6518eaea190d3f08099959cf3a234dc0",
-    status: "inactive",
-    group: "Termi",
-    total: 256,
-    farmingDays: 7
-  },
-  {
     name: "P6 | NICO",
     ronin: "ronin:6cfa7b1ee49e3a77e95eaa4ecd81c6e7575d95b9",
     status: "active",
     group: "Termi"
   },
-  // {
-  //   name: "P7 | TONY",
-  //   ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
-  //   status: "inactive",
-  //   group: "Futsal",
-  //   total: 200,
-  //   farmingDays: 8
-  // },
   {
     name: "P7 | C2 | PRISCILA",
     ronin: "ronin:b3a3553a9a55cca64c703bcd4320d943b723b615",
     status: "active",
     group: "Futsal",
-    // minusTotal: 247,
-    // minusFarmingDays: 10
   },
   {
     name: "P8 | IVAN",
@@ -90,7 +72,7 @@ const SCHOLARSHIPS = [
     name: "P12 | GASPAR",
     ronin: "ronin:6f3fa3cd2a34a604a0cd7df42ced5961d612468d",
     status: "active",
-    group: "Bird CR7"
+    group: "Bird CR7",
   },
   {
     name: "P13 | MAURI FERREYRA",

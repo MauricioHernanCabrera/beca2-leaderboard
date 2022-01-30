@@ -119,27 +119,19 @@
         </template>
 
         <template v-slot:item.slpAverage="{ item }">
-          <CardSlp :value="item.slpAverage" />
+          <CardSlp :value="item.slpAverage" v-if="item.total > 0"/>
         </template>
 
         <template v-slot:item.percentageScholarship="{ item }">
-          <CardPercentage :value="item.percentageScholarship" />
+          <CardPercentage :value="item.percentageScholarship" v-if="item.total > 0" />
         </template>
 
         <template v-slot:item.claimDate="{ item }">
           <CardPayDate :value="item.claimDateText" />
         </template>
 
-        <template v-slot:item.percentageManager="{ item }">
-          <CardPercentage :value="item.percentageManager" />
-        </template>
-
         <template v-slot:item.slpScholarship="{ item }">
-          <CardSlp :value="item.slpScholarship" />
-        </template>
-
-        <template v-slot:item.slpManager="{ item }">
-          <CardSlp :value="item.slpManager" />
+          <CardSlp :value="item.slpScholarship" v-if="item.total > 0"/>
         </template>
 
         <template v-slot:item.total="{ item }">
@@ -166,7 +158,7 @@
           >
             <a
               class="axie_item"
-              v-for="axieItem in item.team"
+              v-for="axieItem in item.team.slice(0, 3)"
               :key="axieItem.id"
               :href="axieItem.marketplaceUrl"
               target="_blank"
@@ -379,6 +371,13 @@ export default {
           slp: formatMoney(this.averagePerScholarship),
           criptoPrice: this.slpPrice
             ? formatMoney(this.averagePerScholarship * this.slpPrice)
+            : 0,
+        },
+        {
+          title: "SLP precio",
+          slp: 1,
+          criptoPrice: this.slpPrice
+            ? formatMoney(this.slpPrice, 4)
             : 0,
         },
       ];
