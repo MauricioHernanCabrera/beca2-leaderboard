@@ -1,8 +1,8 @@
 <template>
   <div class="card_statistic">
     <div class="card_statistic__title">{{ title }}</div>
-    <div class="card_statistic__slp">{{ slp }} SLP</div>
-    <div class="card_statistic__cripto_price">
+    <div class="card_statistic__value">{{ value }} {{ text }}</div>
+    <div class="card_statistic__cripto_price" v-if="criptoPrice">
       ~{{ criptoPrice }} {{ criptoSymbol }}
     </div>
   </div>
@@ -16,19 +16,24 @@ export default {
       required: true,
     },
 
-    slp: {
+    text: {
+      type: String,
+      default: "SLP",
+    },
+
+    value: {
       type: [String, Number],
       required: true,
     },
 
     criptoPrice: {
       type: [String, Number],
-      required: true,
+      default: null,
     },
 
     criptoSymbol: {
       type: String,
-      required: true,
+      default: null,
     },
   },
 };
@@ -47,7 +52,7 @@ export default {
   margin-bottom: 6px;
 }
 
-.card_statistic__slp {
+.card_statistic__value {
   font-size: 20px;
   font-weight: 600;
 }

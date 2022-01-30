@@ -119,11 +119,14 @@
         </template>
 
         <template v-slot:item.slpAverage="{ item }">
-          <CardSlp :value="item.slpAverage" v-if="item.total > 0"/>
+          <CardSlp :value="item.slpAverage" v-if="item.total > 0" />
         </template>
 
         <template v-slot:item.percentageScholarship="{ item }">
-          <CardPercentage :value="item.percentageScholarship" v-if="item.total > 0" />
+          <CardPercentage
+            :value="item.percentageScholarship"
+            v-if="item.total > 0"
+          />
         </template>
 
         <template v-slot:item.claimDate="{ item }">
@@ -131,7 +134,7 @@
         </template>
 
         <template v-slot:item.slpScholarship="{ item }">
-          <CardSlp :value="item.slpScholarship" v-if="item.total > 0"/>
+          <CardSlp :value="item.slpScholarship" v-if="item.total > 0" />
         </template>
 
         <template v-slot:item.total="{ item }">
@@ -340,45 +343,51 @@ export default {
       return [
         {
           title: "Manager",
-          slp: formatMoney(this.slpManager),
+          value: formatMoney(this.slpManager),
           criptoPrice: this.slpPrice
             ? formatMoney(this.slpManager * this.slpPrice)
             : 0,
         },
         {
           title: "Becados",
-          slp: formatMoney(this.slpScholarship),
+          value: formatMoney(this.slpScholarship),
           criptoPrice: this.slpPrice
             ? formatMoney(this.slpScholarship * this.slpPrice)
             : 0,
         },
         {
           title: "Total",
-          slp: formatMoney(this.total),
+          value: formatMoney(this.total),
           criptoPrice: this.slpPrice
             ? formatMoney(this.total * this.slpPrice)
             : 0,
         },
         {
           title: "Promedio",
-          slp: formatMoney(this.averagePerDay),
+          value: formatMoney(this.averagePerDay),
           criptoPrice: this.slpPrice
             ? formatMoney(this.averagePerDay * this.slpPrice)
             : 0,
         },
         {
           title: "Promedio por becado",
-          slp: formatMoney(this.averagePerScholarship),
+          value: formatMoney(this.averagePerScholarship),
           criptoPrice: this.slpPrice
             ? formatMoney(this.averagePerScholarship * this.slpPrice)
             : 0,
         },
         {
           title: "SLP precio",
-          slp: 1,
-          criptoPrice: this.slpPrice
-            ? formatMoney(this.slpPrice, 4)
-            : 0,
+          value: 1,
+          criptoPrice: this.slpPrice ? formatMoney(this.slpPrice, 4) : 0,
+        },
+        {
+          title: "Axies",
+          value: this.scholarshipsPopulated.reduce(
+            (prev, current) => prev + current.team.length,
+            0
+          ),
+          text: "",
         },
       ];
     },
@@ -423,6 +432,7 @@ export default {
     scholarshipsPopulated() {
       return this.scholarships.map((scholarshipItem) => ({
         ...scholarshipItem,
+        email: scholarshipItem.player.email,
         ranking:
           scholarshipItem.status === "active"
             ? this.scholarshipsRankingMap[scholarshipItem.name] || 99999
@@ -529,15 +539,15 @@ export default {
 
     downloadCSV() {
       const headers = [
+        "name",
         "ronin",
-        ...this.headersScholarshipsFiltered
-          .map(({ value }) => value)
-          .filter(
-            (key) =>
-              !["ranking", "group", "claimDate", "damageCalculator"].includes(
-                key
-              )
-          ),
+        "elo",
+        "email",
+        "slpAverage",
+        "percentageScholarship",
+        "slpScholarship",
+        "total",
+        "farmingDays",
       ];
 
       const scholarsFiltered = this.scholarshipsPopulated.filter(
@@ -631,8 +641,6 @@ export default {
               })
             ),
           ]);
-
-          console.log(scholarshipItem.name, gameInfo);
 
           const [, , leaderboard] = items;
 
