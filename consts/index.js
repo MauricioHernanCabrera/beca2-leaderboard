@@ -261,7 +261,6 @@ const SCHOLARSHIPS = [
     player: players["MAURI FERREYRA"],
     status: "active",
     group: "Bird CR7",
-    minusTotal: -6
   },
   {
     ...accounts["P17"],
