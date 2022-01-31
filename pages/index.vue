@@ -152,6 +152,18 @@
             target="_blank"
             >Ver daño</a
           >
+
+          |
+
+          <a
+            v-if="item.team.length >= 3"
+            :href="`https://axie-tools.fans/es/battle-history?roninAddress=${item.ronin.replace(
+              'ronin:',
+              '0x'
+            )}`"
+            target="_blank"
+            >Ver historial</a
+          >
         </template>
 
         <template v-slot:item.group="{ item }">

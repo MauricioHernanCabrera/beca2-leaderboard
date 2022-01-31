@@ -247,7 +247,7 @@ const SCHOLARSHIPS = [
   {
     ...accounts["P24"],
     player: players["MARCOS"],
-    status: "active",
+    status: "inactive",
     group: "Termi"
   },
   {
@@ -259,7 +259,7 @@ const SCHOLARSHIPS = [
   {
     ...accounts["P15"],
     player: players["MAURI FERREYRA"],
-    status: "active",
+    status: "inactive",
     group: "Bird CR7",
   },
   {
