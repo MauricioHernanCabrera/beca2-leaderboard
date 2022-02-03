@@ -225,7 +225,7 @@ const SCHOLARSHIPS = [
   {
     ...accounts["P7"],
     player: players["PRISCILA"],
-    status: "active",
+    status: "inactive",
     group: "Futsal",
     total: 164,
     farmingDays: 5
