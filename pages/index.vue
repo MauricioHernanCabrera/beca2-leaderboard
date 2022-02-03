@@ -99,6 +99,7 @@
         mobile-breakpoint="0"
         class="elevation-1"
         :sort-by="['ranking']"
+        multi-sort
       >
         <template v-slot:item.name="{ item }">
           <a
@@ -116,6 +117,10 @@
 
         <template v-slot:item.elo="{ item }">
           <CardCups :value="item.elo" />
+        </template>
+
+        <template v-slot:item.energy="{ item }">
+          <CardEnergy :value="item.energy" />
         </template>
 
         <template v-slot:item.slpAverage="{ item }">
@@ -208,6 +213,7 @@ import CardSlp from "@/components/Shared/CardSlp";
 import CardUsdt from "@/components/Shared/CardUsdt";
 import CardPercentage from "@/components/Shared/CardPercentage";
 import CardCups from "@/components/Shared/CardCups";
+import CardEnergy from "@/components/Shared/CardEnergy";
 import CardRanking from "@/components/Shared/CardRanking";
 import CardFarmingDays from "@/components/Shared/CardFarmingDays";
 import CardPayDate from "@/components/Shared/CardPayDate";
@@ -225,6 +231,7 @@ export default {
     CardStatistic,
     CardPercentage,
     CardCups,
+    CardEnergy,
     CardRanking,
     CardFarmingDays,
     CardPayDate,
@@ -429,7 +436,7 @@ export default {
     scholarshipsRankingMap() {
       return this.scholarships
         .slice()
-        .filter((item) => item.status === "active")
+        .filter(({ status }) => status === "active")
         .sort((dataA, dataB) => dataB.elo - dataA.elo)
         .map(({ name }) => name)
         .reduce(
@@ -442,14 +449,19 @@ export default {
     },
 
     scholarshipsPopulated() {
-      return this.scholarships.map((scholarshipItem) => ({
-        ...scholarshipItem,
-        email: scholarshipItem.player.email,
-        ranking:
-          scholarshipItem.status === "active"
-            ? this.scholarshipsRankingMap[scholarshipItem.name] || 99999
-            : 99999,
-      }));
+      return this.scholarships.map((scholarshipItem) => {
+        const energy = scholarshipItem.energy || 20;
+
+        return {
+          ...scholarshipItem,
+          email: scholarshipItem.player.email,
+          energy,
+          ranking:
+            scholarshipItem.status === "active"
+              ? this.scholarshipsRankingMap[scholarshipItem.name] || 99999
+              : 99999,
+        };
+      });
     },
 
     headersScholarshipsFiltered() {
@@ -466,6 +478,10 @@ export default {
         {
           text: "Copas",
           value: "elo",
+        },
+        {
+          text: "Energía",
+          value: "energy",
         },
         {
           text: "SLP Promedio",

@@ -194,13 +194,15 @@ const SCHOLARSHIPS = [
     ...accounts["P1"],
     player: players["GUIDO CABRERA"],
     status: "active",
-    group: "PlBePa"
+    group: "PlBePa",
+    energy: 40
   },
   {
     ...accounts["P2"],
     player: players["MILI MALDONADO"],
     status: "active",
-    group: "Unico"
+    group: "Unico",
+    energy: 40
   },
   {
     ...accounts["P11"],
@@ -257,16 +259,12 @@ const SCHOLARSHIPS = [
     group: "Bird CR7"
   },
   {
-    ...accounts["P15"],
-    player: players["MAURI FERREYRA"],
-    status: "inactive",
-    group: "Bird CR7",
-  },
-  {
     ...accounts["P17"],
     player: players["LUIS FERREYRA"],
-    status: "active",
-    group: "Bird CR7"
+    status: "inactive",
+    group: "Bird CR7",
+    total: 1744,
+    farmingDays: 12
   },
   {
     ...accounts["P20"],
