@@ -322,17 +322,22 @@ export default {
         return 0;
       }
 
+      const scholarsFiltered = this.scholarshipsPopulated.filter(
+        ({ status }) => status === "active"
+      );
+
       return (
-        this.scholarshipsPopulated.reduce(
+        scholarsFiltered.reduce(
           (prev, { slpAverage }) => prev + slpAverage,
           0
-        ) / this.scholarshipsPopulated.length
+        ) / scholarsFiltered.length
       );
     },
 
     averagePerDay() {
       return this.scholarshipsPopulated.reduce(
-        (prev, { slpAverage }) => prev + slpAverage,
+        (prev, { slpAverage, status }) =>
+          status === "active" ? prev + slpAverage : prev,
         0
       );
     },
