@@ -220,7 +220,8 @@ const SCHOLARSHIPS = [
     ...accounts["P23"],
     player: players["NICO"],
     status: "active",
-    group: "Termi"
+    group: "Termi",
+    energy: 40
   },
   {
     ...accounts["P7"],
