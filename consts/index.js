@@ -262,14 +262,6 @@ const SCHOLARSHIPS = [
     group: "Bird CR7"
   },
   {
-    ...accounts["P17"],
-    player: players["LUIS FERREYRA"],
-    status: "inactive",
-    group: "Bird CR7",
-    total: 1744,
-    farmingDays: 12
-  },
-  {
     ...accounts["P20"],
     player: players["HERNAN FLORES"],
     status: "active",
