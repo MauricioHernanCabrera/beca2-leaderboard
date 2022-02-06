@@ -235,7 +235,8 @@ const SCHOLARSHIPS = [
     ...accounts["P16"],
     player: players["IVAN"],
     status: "active",
-    group: "Bird CR7"
+    group: "Bird CR7",
+    minusTotal: -63
   },
   {
     ...accounts["P9"],

@@ -99,7 +99,6 @@
         mobile-breakpoint="0"
         class="elevation-1"
         :sort-by="['ranking']"
-        multi-sort
       >
         <template v-slot:item.name="{ item }">
           <a
