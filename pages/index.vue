@@ -77,6 +77,15 @@
 
       <v-row>
         <v-col cols="12" md="4">
+          <v-text-field
+            label="Becado"
+            v-model="filters.name"
+            outlined
+            clearable
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="12" md="4">
           <v-select
             :items="groups"
             label="Grupo"
@@ -153,25 +162,27 @@
           <CardFarmingDays :value="item.farmingDays" />
         </template>
 
-        <template v-slot:item.damageCalculator="{ item }">
-          <a
-            v-if="item.team.length >= 3"
-            :href="`https://axie-tools.fans/es/damage-calculator?axie1=${item.team[0].id}&axie2=${item.team[1].id}&axie3=${item.team[2].id}`"
-            target="_blank"
-            >Ver daño</a
-          >
+        <template v-slot:item.actions="{ item }">
+          <div class="text-truncate">
+            <a
+              v-if="item.team.length >= 3"
+              :href="`https://axie-tools.fans/es/damage-calculator?axie1=${item.team[0].id}&axie2=${item.team[1].id}&axie3=${item.team[2].id}`"
+              target="_blank"
+              >Ver daño</a
+            >
 
-          |
+            |
 
-          <a
-            v-if="item.team.length >= 3"
-            :href="`https://axie-tools.fans/es/battle-history?roninAddress=${item.ronin.replace(
-              'ronin:',
-              '0x'
-            )}`"
-            target="_blank"
-            >Ver historial</a
-          >
+            <a
+              v-if="item.team.length >= 3"
+              :href="`https://axie-tools.fans/es/battle-history?roninAddress=${item.ronin.replace(
+                'ronin:',
+                '0x'
+              )}`"
+              target="_blank"
+              >Ver historial</a
+            >
+          </div>
         </template>
 
         <template v-slot:item.group="{ item }">
@@ -246,6 +257,7 @@ export default {
     return {
       filters: {
         group: null,
+        name: null,
       },
 
       headersPayDays: [
@@ -424,10 +436,19 @@ export default {
     scholarshipsFiltered() {
       let items = this.scholarshipsPopulated;
 
-      const { group } = this.filters;
+      const { group, name } = this.filters;
 
       if (group) {
         items = items.filter((item) => item.group === group);
+      }
+
+      if (name) {
+        const lowerName = name.toLowerCase();
+        items = items.filter(
+          (item) =>
+            item.name.toLowerCase().includes(lowerName) &&
+            item.status === "active"
+        );
       }
 
       return items;
@@ -490,10 +511,6 @@ export default {
           value: "elo",
         },
         {
-          text: "Versión",
-          value: "version",
-        },
-        {
           text: "Energía",
           value: "energy",
         },
@@ -501,7 +518,6 @@ export default {
           text: "SLP Promedio",
           value: "slpAverage",
         },
-
         {
           text: "Porcentaje Becado",
           value: "percentageScholarship",
@@ -513,6 +529,10 @@ export default {
         {
           text: "SLP Total",
           value: "total",
+        },
+        {
+          text: "Versión",
+          value: "version",
         },
         {
           text: "Días de farmeo",
@@ -527,9 +547,9 @@ export default {
           value: "group",
         },
         {
-          text: "Calculadora de daño",
+          text: "Acciones",
           sortable: false,
-          value: "damageCalculator",
+          value: "actions",
         },
       ];
     },
