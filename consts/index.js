@@ -193,86 +193,223 @@ const SCHOLARSHIPS = [
   {
     ...accounts["P1"],
     player: players["GUIDO CABRERA"],
+    status: "inactive",
+    group: "PlBePa",
+    energy: 40,
+    version: 1,
+    total: 2656,
+    farmingDays: 11
+  },
+  {
+    ...accounts["P1"],
+    player: players["GUIDO CABRERA"],
     status: "active",
     group: "PlBePa",
-    energy: 40
+    energy: 40,
+    version: 2,
+    minusTotal: 2656,
+    minusFarmingDays: 12
+  },
+
+  {
+    ...accounts["P2"],
+    player: players["MILI MALDONADO"],
+    status: "inactive",
+    group: "Unico",
+    energy: 40,
+    version: 1,
+    total: 2653,
+    farmingDays: 11
   },
   {
     ...accounts["P2"],
     player: players["MILI MALDONADO"],
     status: "active",
     group: "Unico",
-    energy: 40
+    energy: 40,
+    version: 2,
+    minusTotal: 2653,
+    minusFarmingDays: 12
+  },
+
+  {
+    ...accounts["P11"],
+    player: players["GASTON CABRERA"],
+    status: "inactive",
+    group: "Unico",
+    version: 1,
+    total: 897,
+    farmingDays: 10
   },
   {
     ...accounts["P11"],
     player: players["GASTON CABRERA"],
     status: "active",
-    group: "Unico"
+    group: "Unico",
+    version: 2,
+    minusTotal: 897,
+    minusFarmingDays: 11
+  },
+
+  {
+    ...accounts["P4"],
+    player: players["CANELA"],
+    status: "inactive",
+    group: "Unico",
+    version: 1,
+    total: 1168,
+    farmingDays: 11
   },
   {
     ...accounts["P4"],
     player: players["CANELA"],
     status: "active",
-    group: "Unico"
+    group: "Unico",
+    version: 2,
+    minusTotal: 1168,
+    minusFarmingDays: 12
+  },
+
+  {
+    ...accounts["P23"],
+    player: players["NICO"],
+    status: "inactive",
+    group: "Termi",
+    energy: 40,
+    version: 1,
+    total: 2068,
+    farmingDays: 12
   },
   {
     ...accounts["P23"],
     player: players["NICO"],
     status: "active",
     group: "Termi",
-    energy: 40
+    energy: 40,
+    version: 2,
+    minusTotal: 2068,
+    minusFarmingDays: 13
   },
+
   {
     ...accounts["P7"],
     player: players["PRISCILA"],
     status: "inactive",
     group: "Futsal",
     total: 164,
-    farmingDays: 5
+    farmingDays: 5,
+    version: 1
+  },
+
+  {
+    ...accounts["P16"],
+    player: players["IVAN"],
+    status: "inactive",
+    group: "Bird CR7",
+    version: 1,
+    total: 477,
+    farmingDays: 3
   },
   {
     ...accounts["P16"],
     player: players["IVAN"],
     status: "active",
     group: "Bird CR7",
-    minusTotal: -63
+    version: 2,
+    minusTotal: 414,
+    minusFarmingDays: 4
+  },
+
+  {
+    ...accounts["P9"],
+    player: players["NAHUEL"],
+    status: "inactive",
+    group: "Termi",
+    version: 1,
+    total: 1097,
+    farmingDays: 11
   },
   {
     ...accounts["P9"],
     player: players["NAHUEL"],
     status: "active",
-    group: "Termi"
+    group: "Termi",
+    version: 2,
+    minusTotal: 1097,
+    minusFarmingDays: 12
+  },
+
+  {
+    ...accounts["P10"],
+    player: players["JOSE"],
+    status: "inactive",
+    group: "Unico",
+    version: 1,
+    total: 1341,
+    farmingDays: 11
   },
   {
     ...accounts["P10"],
     player: players["JOSE"],
     status: "active",
-    group: "Unico"
+    group: "Unico",
+    version: 2,
+    minusTotal: 1341,
+    minusFarmingDays: 12
   },
+
   {
     ...accounts["P24"],
     player: players["MARCOS"],
     status: "inactive",
-    group: "Termi"
+    group: "Termi",
+    version: 1
+  },
+
+  {
+    ...accounts["P14"],
+    player: players["GASPAR"],
+    status: "inactive",
+    group: "Bird CR7",
+    version: 1,
+    total: 1667,
+    farmingDays: 10
   },
   {
     ...accounts["P14"],
     player: players["GASPAR"],
     status: "active",
-    group: "Bird CR7"
+    group: "Bird CR7",
+    version: 2,
+    minusTotal: 1667,
+    minusFarmingDays: 11
+  },
+
+  {
+    ...accounts["P20"],
+    player: players["HERNAN FLORES"],
+    status: "inactive",
+    group: "Futsal",
+    version: 1,
+    total: 142,
+    farmingDays: 3
   },
   {
     ...accounts["P20"],
     player: players["HERNAN FLORES"],
     status: "active",
-    group: "Futsal"
+    group: "Futsal",
+    version: 2,
+    minusTotal: 142,
+    minusFarmingDays: 4
   },
+
   {
     ...accounts["P22"],
     player: players["SOL CRUZ"],
     status: "active",
-    group: "Futsal"
+    group: "Futsal",
+    version: 2
   }
 ].map(scholarItem => ({
   ...scholarItem,

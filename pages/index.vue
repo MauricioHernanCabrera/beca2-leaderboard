@@ -118,6 +118,10 @@
           <CardCups :value="item.elo" />
         </template>
 
+        <template v-slot:item.version="{ item }">
+          <CardVersion :value="item.version" />
+        </template>
+
         <template v-slot:item.energy="{ item }">
           <CardEnergy :value="item.energy" />
         </template>
@@ -212,6 +216,7 @@ import CardSlp from "@/components/Shared/CardSlp";
 import CardUsdt from "@/components/Shared/CardUsdt";
 import CardPercentage from "@/components/Shared/CardPercentage";
 import CardCups from "@/components/Shared/CardCups";
+import CardVersion from "@/components/Shared/CardVersion";
 import CardEnergy from "@/components/Shared/CardEnergy";
 import CardRanking from "@/components/Shared/CardRanking";
 import CardFarmingDays from "@/components/Shared/CardFarmingDays";
@@ -230,6 +235,7 @@ export default {
     CardStatistic,
     CardPercentage,
     CardCups,
+    CardVersion,
     CardEnergy,
     CardRanking,
     CardFarmingDays,
@@ -484,6 +490,10 @@ export default {
           value: "elo",
         },
         {
+          text: "Versión",
+          value: "version",
+        },
+        {
           text: "Energía",
           value: "energy",
         },
@@ -704,7 +714,7 @@ export default {
             claimDateText: claimDate.format("DD/MM"),
           };
         },
-        { chunkLength: 10 }
+        { chunkLength: 15 }
       );
 
       this.isLoading = false;
@@ -713,36 +723,87 @@ export default {
     },
 
     calcSlpByOwnership(scholarshipItem, { total, slpAverage }) {
-      if (scholarshipItem.isMine) {
-        return {
-          percentageManager: 100,
-          percentageScholarship: 0,
-          slpManager: total,
-          slpScholarship: 0,
-        };
-      }
+      const energy = scholarshipItem.energy || 20;
 
-      if (slpAverage >= 135) {
-        return {
-          percentageManager: 50,
-          percentageScholarship: 50,
-          slpManager: total * 0.5,
-          slpScholarship: total * 0.5,
-        };
-      } else if (slpAverage >= 105) {
-        return {
-          percentageManager: 60,
-          percentageScholarship: 40,
-          slpManager: total * 0.6,
-          slpScholarship: total * 0.4,
-        };
-      } else {
-        return {
-          percentageManager: 70,
-          percentageScholarship: 30,
-          slpManager: total * 0.7,
-          slpScholarship: total * 0.3,
-        };
+      switch (scholarshipItem.version) {
+        case 1: {
+          if (slpAverage >= 135) {
+            return {
+              percentageManager: 50,
+              percentageScholarship: 50,
+              slpManager: total * 0.5,
+              slpScholarship: total * 0.5,
+            };
+          } else if (slpAverage >= 105) {
+            return {
+              percentageManager: 60,
+              percentageScholarship: 40,
+              slpManager: total * 0.6,
+              slpScholarship: total * 0.4,
+            };
+          } else {
+            return {
+              percentageManager: 70,
+              percentageScholarship: 30,
+              slpManager: total * 0.7,
+              slpScholarship: total * 0.3,
+            };
+          }
+        }
+
+        case 2: {
+          switch (energy) {
+            case 20: {
+              if (slpAverage >= 60) {
+                return {
+                  percentageManager: 50,
+                  percentageScholarship: 50,
+                  slpManager: total * 0.5,
+                  slpScholarship: total * 0.5,
+                };
+              } else if (slpAverage >= 50) {
+                return {
+                  percentageManager: 56.66,
+                  percentageScholarship: 43.34,
+                  slpManager: total * 0.5666,
+                  slpScholarship: total * 0.4334,
+                };
+              } else {
+                return {
+                  percentageManager: 70,
+                  percentageScholarship: 30,
+                  slpManager: total * 0.7,
+                  slpScholarship: total * 0.3,
+                };
+              }
+            }
+
+            case 40: {
+              if (slpAverage >= 120) {
+                return {
+                  percentageManager: 50,
+                  percentageScholarship: 50,
+                  slpManager: total * 0.5,
+                  slpScholarship: total * 0.5,
+                };
+              } else if (slpAverage >= 100) {
+                return {
+                  percentageManager: 56.66,
+                  percentageScholarship: 43.34,
+                  slpManager: total * 0.5666,
+                  slpScholarship: total * 0.4334,
+                };
+              } else {
+                return {
+                  percentageManager: 70,
+                  percentageScholarship: 30,
+                  slpManager: total * 0.7,
+                  slpScholarship: total * 0.3,
+                };
+              }
+            }
+          }
+        }
       }
     },
 
