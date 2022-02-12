@@ -269,17 +269,6 @@ const SCHOLARSHIPS = [
     minusTotal: 1168,
     minusFarmingDays: 12
   },
-
-  {
-    ...accounts["P23"],
-    player: players["NICO"],
-    status: "inactive",
-    group: "Termi",
-    energy: 40,
-    version: 1,
-    total: 2068,
-    farmingDays: 12
-  },
   {
     ...accounts["P23"],
     player: players["NICO"],
@@ -287,8 +276,6 @@ const SCHOLARSHIPS = [
     group: "Termi",
     energy: 40,
     version: 2,
-    minusTotal: 2068,
-    minusFarmingDays: 13
   },
 
   {
@@ -356,14 +343,6 @@ const SCHOLARSHIPS = [
     version: 2,
     minusTotal: 1341,
     minusFarmingDays: 12
-  },
-
-  {
-    ...accounts["P24"],
-    player: players["MARCOS"],
-    status: "inactive",
-    group: "Termi",
-    version: 1
   },
 
   {

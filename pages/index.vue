@@ -424,10 +424,9 @@ export default {
         },
         {
           title: "Axies",
-          value: this.scholarshipsPopulated.reduce(
-            (prev, current) => prev + current.team.length,
-            0
-          ),
+          value: this.scholarshipsPopulated
+            .filter((item) => item.status === "active")
+            .reduce((prev, current) => prev + current.team.length, 0),
           text: "",
         },
       ];
@@ -788,7 +787,16 @@ export default {
                   slpManager: total * 0.5666,
                   slpScholarship: total * 0.4334,
                 };
-              } else {
+              }
+              //  else if (slpAverage >= 40) {
+              //   return {
+              //     percentageManager: 63.33,
+              //     percentageScholarship: 36.67,
+              //     slpManager: total * 0.6333,
+              //     slpScholarship: total * 0.3667,
+              //   };
+              // }
+              else {
                 return {
                   percentageManager: 70,
                   percentageScholarship: 30,
