@@ -193,33 +193,10 @@ const SCHOLARSHIPS = [
   {
     ...accounts["P1"],
     player: players["GUIDO CABRERA"],
-    status: "inactive",
-    group: "PlBePa",
-    energy: 40,
-    version: 1,
-    total: 2656,
-    farmingDays: 11
-  },
-  {
-    ...accounts["P1"],
-    player: players["GUIDO CABRERA"],
     status: "active",
     group: "PlBePa",
     energy: 40,
     version: 2,
-    minusTotal: 2656,
-    minusFarmingDays: 12
-  },
-
-  {
-    ...accounts["P2"],
-    player: players["MILI MALDONADO"],
-    status: "inactive",
-    group: "Unico",
-    energy: 40,
-    version: 1,
-    total: 2653,
-    farmingDays: 11
   },
   {
     ...accounts["P2"],
@@ -228,8 +205,6 @@ const SCHOLARSHIPS = [
     group: "Unico",
     energy: 40,
     version: 2,
-    minusTotal: 2653,
-    minusFarmingDays: 12
   },
 
   {
@@ -254,20 +229,9 @@ const SCHOLARSHIPS = [
   {
     ...accounts["P4"],
     player: players["CANELA"],
-    status: "inactive",
-    group: "Unico",
-    version: 1,
-    total: 1168,
-    farmingDays: 11
-  },
-  {
-    ...accounts["P4"],
-    player: players["CANELA"],
     status: "active",
     group: "Unico",
     version: 2,
-    minusTotal: 1168,
-    minusFarmingDays: 12
   },
   {
     ...accounts["P23"],
@@ -310,39 +274,17 @@ const SCHOLARSHIPS = [
   {
     ...accounts["P9"],
     player: players["NAHUEL"],
-    status: "inactive",
-    group: "Termi",
-    version: 1,
-    total: 1097,
-    farmingDays: 11
-  },
-  {
-    ...accounts["P9"],
-    player: players["NAHUEL"],
     status: "active",
     group: "Termi",
     version: 2,
-    minusTotal: 1097,
-    minusFarmingDays: 12
   },
 
   {
     ...accounts["P10"],
     player: players["JOSE"],
-    status: "inactive",
-    group: "Unico",
-    version: 1,
-    total: 1341,
-    farmingDays: 11
-  },
-  {
-    ...accounts["P10"],
-    player: players["JOSE"],
     status: "active",
     group: "Unico",
     version: 2,
-    minusTotal: 1341,
-    minusFarmingDays: 12
   },
 
   {
