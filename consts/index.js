@@ -206,24 +206,12 @@ const SCHOLARSHIPS = [
     energy: 40,
     version: 2,
   },
-
-  {
-    ...accounts["P11"],
-    player: players["GASTON CABRERA"],
-    status: "inactive",
-    group: "Unico",
-    version: 1,
-    total: 897,
-    farmingDays: 10
-  },
   {
     ...accounts["P11"],
     player: players["GASTON CABRERA"],
     status: "active",
     group: "Unico",
     version: 2,
-    minusTotal: 897,
-    minusFarmingDays: 11
   },
 
   {
@@ -240,16 +228,6 @@ const SCHOLARSHIPS = [
     group: "Termi",
     energy: 40,
     version: 2,
-  },
-
-  {
-    ...accounts["P7"],
-    player: players["PRISCILA"],
-    status: "inactive",
-    group: "Futsal",
-    total: 164,
-    farmingDays: 5,
-    version: 1
   },
 
   {
@@ -290,20 +268,9 @@ const SCHOLARSHIPS = [
   {
     ...accounts["P14"],
     player: players["GASPAR"],
-    status: "inactive",
-    group: "Bird CR7",
-    version: 1,
-    total: 1667,
-    farmingDays: 10
-  },
-  {
-    ...accounts["P14"],
-    player: players["GASPAR"],
     status: "active",
     group: "Bird CR7",
     version: 2,
-    minusTotal: 1667,
-    minusFarmingDays: 11
   },
 
   {
