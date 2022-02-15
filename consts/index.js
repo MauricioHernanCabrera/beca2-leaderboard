@@ -265,13 +265,13 @@ const SCHOLARSHIPS = [
     version: 2,
   },
 
-  {
-    ...accounts["P14"],
-    player: players["GASPAR"],
-    status: "active",
-    group: "Bird CR7",
-    version: 2,
-  },
+  // {
+  //   ...accounts["P14"],
+  //   player: players["GASPAR"],
+  //   status: "active",
+  //   group: "Bird CR7",
+  //   version: 2,
+  // },
 
   {
     ...accounts["P20"],
