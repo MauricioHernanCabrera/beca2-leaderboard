@@ -773,62 +773,61 @@ export default {
         case 2: {
           switch (energy) {
             case 20: {
+              let percentageScholarship = 0;
+
               if (slpAverage >= 60) {
-                return {
-                  percentageManager: 50,
-                  percentageScholarship: 50,
-                  slpManager: total * 0.5,
-                  slpScholarship: total * 0.5,
-                };
+                percentageScholarship = 50;
+              } else if (slpAverage >= 55) {
+                percentageScholarship = 46.67;
               } else if (slpAverage >= 50) {
-                return {
-                  percentageManager: 56.66,
-                  percentageScholarship: 43.34,
-                  slpManager: total * 0.5666,
-                  slpScholarship: total * 0.4334,
-                };
+                percentageScholarship = 43.34;
+              } else if (slpAverage >= 45) {
+                percentageScholarship = 40.0;
+              } else if (slpAverage >= 40) {
+                percentageScholarship = 36.67;
+              } else if (slpAverage >= 35) {
+                percentageScholarship = 33.34;
+              } else {
+                percentageScholarship = 30.0;
               }
-              //  else if (slpAverage >= 40) {
-              //   return {
-              //     percentageManager: 63.33,
-              //     percentageScholarship: 36.67,
-              //     slpManager: total * 0.6333,
-              //     slpScholarship: total * 0.3667,
-              //   };
-              // }
-              else {
-                return {
-                  percentageManager: 70,
-                  percentageScholarship: 30,
-                  slpManager: total * 0.7,
-                  slpScholarship: total * 0.3,
-                };
-              }
+
+              const percentageManager = 100 - percentageScholarship;
+
+              return {
+                percentageManager,
+                percentageScholarship,
+                slpManager: total * (percentageManager / 100),
+                slpScholarship: total * (percentageScholarship / 100),
+              };
             }
 
             case 40: {
+              let percentageScholarship = 0;
+
               if (slpAverage >= 120) {
-                return {
-                  percentageManager: 50,
-                  percentageScholarship: 50,
-                  slpManager: total * 0.5,
-                  slpScholarship: total * 0.5,
-                };
+                percentageScholarship = 50;
+              } else if (slpAverage >= 110) {
+                percentageScholarship = 46.67;
               } else if (slpAverage >= 100) {
-                return {
-                  percentageManager: 56.66,
-                  percentageScholarship: 43.34,
-                  slpManager: total * 0.5666,
-                  slpScholarship: total * 0.4334,
-                };
+                percentageScholarship = 43.34;
+              } else if (slpAverage >= 90) {
+                percentageScholarship = 40.0;
+              } else if (slpAverage >= 80) {
+                percentageScholarship = 36.67;
+              } else if (slpAverage >= 70) {
+                percentageScholarship = 33.34;
               } else {
-                return {
-                  percentageManager: 70,
-                  percentageScholarship: 30,
-                  slpManager: total * 0.7,
-                  slpScholarship: total * 0.3,
-                };
+                percentageScholarship = 30.0;
               }
+
+              const percentageManager = 100 - percentageScholarship;
+
+              return {
+                percentageManager,
+                percentageScholarship,
+                slpManager: total * (percentageManager / 100),
+                slpScholarship: total * (percentageScholarship / 100),
+              };
             }
           }
         }
