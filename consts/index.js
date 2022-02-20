@@ -217,9 +217,21 @@ const SCHOLARSHIPS = [
   {
     ...accounts["P4"],
     player: players["CANELA"],
+    status: "inactive",
+    group: "Unico",
+    version: 2,
+    total: 349,
+    farmingDays: 7
+  },
+  {
+    ...accounts["P4"],
+    player: players["CANELA"],
     status: "active",
     group: "Unico",
     version: 2,
+    energy: 40,
+    minusTotal: 349,
+    minusFarmingDays: 8
   },
   {
     ...accounts["P23"],
@@ -285,11 +297,11 @@ const SCHOLARSHIPS = [
   {
     ...accounts["P20"],
     player: players["HERNAN FLORES"],
-    status: "active",
+    status: "inactive",
     group: "Futsal",
     version: 2,
-    minusTotal: 142,
-    minusFarmingDays: 4
+    total: 97,
+    farmingDays: 10
   },
 
   {
