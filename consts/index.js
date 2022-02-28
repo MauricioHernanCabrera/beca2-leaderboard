@@ -212,16 +212,7 @@ const SCHOLARSHIPS = [
     status: "active",
     group: "Unico",
     version: 2,
-  },
-
-  {
-    ...accounts["P4"],
-    player: players["CANELA"],
-    status: "inactive",
-    group: "Unico",
-    version: 2,
-    total: 349,
-    farmingDays: 7
+    minusFarmingDays: 1
   },
   {
     ...accounts["P4"],
@@ -230,26 +221,16 @@ const SCHOLARSHIPS = [
     group: "Unico",
     version: 2,
     energy: 40,
-    minusTotal: 349,
-    minusFarmingDays: 8
+    minusTotal: -78
   },
   {
     ...accounts["P23"],
     player: players["NICO"],
     status: "active",
     group: "Termi",
-    energy: 40,
+    energy: 20,
     version: 2,
-  },
-
-  {
-    ...accounts["P16"],
-    player: players["IVAN"],
-    status: "inactive",
-    group: "Bird CR7",
-    version: 1,
-    total: 477,
-    farmingDays: 3
+    minusTotal: -77
   },
   {
     ...accounts["P16"],
@@ -257,10 +238,8 @@ const SCHOLARSHIPS = [
     status: "active",
     group: "Bird CR7",
     version: 2,
-    minusTotal: 414,
-    minusFarmingDays: 4
+    minusTotal: -33
   },
-
   {
     ...accounts["P9"],
     player: players["NAHUEL"],
@@ -268,7 +247,6 @@ const SCHOLARSHIPS = [
     group: "Termi",
     version: 2,
   },
-
   {
     ...accounts["P10"],
     player: players["JOSE"],
@@ -276,40 +254,13 @@ const SCHOLARSHIPS = [
     group: "Unico",
     version: 2,
   },
-
-  // {
-  //   ...accounts["P14"],
-  //   player: players["GASPAR"],
-  //   status: "active",
-  //   group: "Bird CR7",
-  //   version: 2,
-  // },
-
-  {
-    ...accounts["P20"],
-    player: players["HERNAN FLORES"],
-    status: "inactive",
-    group: "Futsal",
-    version: 1,
-    total: 142,
-    farmingDays: 3
-  },
-  {
-    ...accounts["P20"],
-    player: players["HERNAN FLORES"],
-    status: "inactive",
-    group: "Futsal",
-    version: 2,
-    total: 97,
-    farmingDays: 10
-  },
-
   {
     ...accounts["P22"],
     player: players["SOL CRUZ"],
     status: "active",
     group: "Futsal",
-    version: 2
+    version: 2,
+    minusTotal: -27
   }
 ].map(scholarItem => ({
   ...scholarItem,
