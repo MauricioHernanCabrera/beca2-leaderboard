@@ -238,7 +238,9 @@ const SCHOLARSHIPS = [
     status: "active",
     group: "Bird CR7",
     version: 2,
-    minusTotal: -33
+    energy: 40,
+    minusTotal: -33,
+    minusFarmingDays: 1
   },
   {
     ...accounts["P9"],
