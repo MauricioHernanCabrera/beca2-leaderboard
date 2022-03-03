@@ -190,21 +190,21 @@ const accounts = {
 };
 
 const SCHOLARSHIPS = [
-  {
-    ...accounts["P1"],
-    player: players["GUIDO CABRERA"],
-    status: "active",
-    group: "PlBePa",
-    energy: 40,
-    version: 2,
-  },
+  // {
+  //   ...accounts["P1"],
+  //   player: players["GUIDO CABRERA"],
+  //   status: "active",
+  //   group: "PlBePa",
+  //   energy: 40,
+  //   version: 2,
+  // },
   {
     ...accounts["P2"],
     player: players["MILI MALDONADO"],
     status: "active",
     group: "Unico",
     energy: 40,
-    version: 2,
+    version: 2
   },
   {
     ...accounts["P11"],
@@ -247,14 +247,23 @@ const SCHOLARSHIPS = [
     player: players["NAHUEL"],
     status: "active",
     group: "Termi",
-    version: 2,
+    version: 2
   },
   {
     ...accounts["P10"],
     player: players["JOSE"],
     status: "active",
     group: "Unico",
+    version: 2
+  },
+  {
+    ...accounts["P22"],
+    player: players["SOL CRUZ"],
+    status: "inactive",
+    group: "Futsal",
     version: 2,
+    total: 199,
+    farmingDays: 4
   },
   {
     ...accounts["P22"],
@@ -262,8 +271,18 @@ const SCHOLARSHIPS = [
     status: "active",
     group: "Futsal",
     version: 2,
-    minusTotal: -27
+    energy: 40,
+    minusTotal: 172,
+    minusFarmingDays: 4
   }
+  // {
+  //   ...accounts["P22"],
+  //   player: players["SOL CRUZ"],
+  //   status: "active",
+  //   group: "Futsal",
+  //   version: 2,
+  //   minusTotal: -27
+  // }
 ].map(scholarItem => ({
   ...scholarItem,
   name: `${scholarItem.name} | ${scholarItem.player.name}`
