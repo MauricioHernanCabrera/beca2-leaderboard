@@ -239,8 +239,10 @@ const SCHOLARSHIPS = [
     group: "Bird CR7",
     version: 2,
     energy: 40,
-    minusTotal: -33,
-    minusFarmingDays: 1
+    total: 1162,
+    farmingDays: 11
+    // minusTotal: -33,
+    // minusFarmingDays: 1
   },
   {
     ...accounts["P9"],
