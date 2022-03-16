@@ -190,21 +190,13 @@ const accounts = {
 };
 
 const SCHOLARSHIPS = [
-  // {
-  //   ...accounts["P1"],
-  //   player: players["GUIDO CABRERA"],
-  //   status: "active",
-  //   group: "PlBePa",
-  //   energy: 40,
-  //   version: 2,
-  // },
   {
     ...accounts["P2"],
     player: players["MILI MALDONADO"],
     status: "active",
     group: "Unico",
     energy: 40,
-    version: 2
+    version: 2,
   },
   {
     ...accounts["P11"],
@@ -212,7 +204,6 @@ const SCHOLARSHIPS = [
     status: "active",
     group: "Unico",
     version: 2,
-    minusFarmingDays: 1
   },
   {
     ...accounts["P4"],
@@ -221,16 +212,14 @@ const SCHOLARSHIPS = [
     group: "Unico",
     version: 2,
     energy: 40,
-    minusTotal: -78
   },
   {
     ...accounts["P23"],
     player: players["NICO"],
     status: "active",
     group: "Termi",
-    energy: 20,
     version: 2,
-    minusTotal: -77
+    energy: 20,
   },
   {
     ...accounts["P16"],
@@ -239,33 +228,20 @@ const SCHOLARSHIPS = [
     group: "Bird CR7",
     version: 2,
     energy: 40,
-    total: 1162,
-    farmingDays: 11
-    // minusTotal: -33,
-    // minusFarmingDays: 1
   },
   {
     ...accounts["P9"],
     player: players["NAHUEL"],
     status: "active",
     group: "Termi",
-    version: 2
+    version: 2,
   },
   {
     ...accounts["P10"],
     player: players["JOSE"],
     status: "active",
     group: "Unico",
-    version: 2
-  },
-  {
-    ...accounts["P22"],
-    player: players["SOL CRUZ"],
-    status: "inactive",
-    group: "Futsal",
     version: 2,
-    total: 199,
-    farmingDays: 4
   },
   {
     ...accounts["P22"],
@@ -274,17 +250,7 @@ const SCHOLARSHIPS = [
     group: "Futsal",
     version: 2,
     energy: 40,
-    minusTotal: 172,
-    minusFarmingDays: 4
   }
-  // {
-  //   ...accounts["P22"],
-  //   player: players["SOL CRUZ"],
-  //   status: "active",
-  //   group: "Futsal",
-  //   version: 2,
-  //   minusTotal: -27
-  // }
 ].map(scholarItem => ({
   ...scholarItem,
   name: `${scholarItem.name} | ${scholarItem.player.name}`
