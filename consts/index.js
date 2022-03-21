@@ -214,27 +214,12 @@ const SCHOLARSHIPS = [
     energy: 40,
   },
   {
-    ...accounts["P23"],
-    player: players["NICO"],
-    status: "active",
-    group: "Termi",
-    version: 2,
-    energy: 20,
-  },
-  {
     ...accounts["P16"],
     player: players["IVAN"],
     status: "active",
     group: "Bird CR7",
     version: 2,
     energy: 40,
-  },
-  {
-    ...accounts["P9"],
-    player: players["NAHUEL"],
-    status: "active",
-    group: "Termi",
-    version: 2,
   },
   {
     ...accounts["P10"],
