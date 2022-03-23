@@ -196,14 +196,14 @@ const SCHOLARSHIPS = [
     status: "active",
     group: "Unico",
     energy: 40,
-    version: 2,
+    version: 2
   },
   {
     ...accounts["P11"],
     player: players["GASTON CABRERA"],
     status: "active",
     group: "Unico",
-    version: 2,
+    version: 2
   },
   {
     ...accounts["P4"],
@@ -211,7 +211,7 @@ const SCHOLARSHIPS = [
     status: "active",
     group: "Unico",
     version: 2,
-    energy: 40,
+    energy: 40
   },
   {
     ...accounts["P16"],
@@ -220,13 +220,14 @@ const SCHOLARSHIPS = [
     group: "Bird CR7",
     version: 2,
     energy: 40,
+    minusFarmingDays: 2
   },
   {
     ...accounts["P10"],
     player: players["JOSE"],
     status: "active",
     group: "Unico",
-    version: 2,
+    version: 2
   },
   {
     ...accounts["P22"],
@@ -234,7 +235,7 @@ const SCHOLARSHIPS = [
     status: "active",
     group: "Futsal",
     version: 2,
-    energy: 40,
+    energy: 40
   }
 ].map(scholarItem => ({
   ...scholarItem,

@@ -480,7 +480,10 @@ export default {
 
     scholarshipsPopulated() {
       return this.scholarships.map((scholarshipItem) => {
-        const energy = scholarshipItem.energy || 20;
+        const energy =
+          scholarshipItem && scholarshipItem.energy
+            ? scholarshipItem.energy
+            : 20;
 
         return {
           ...scholarshipItem,
@@ -684,15 +687,15 @@ export default {
         async (scholarshipItem) => {
           const address = scholarshipItem.ronin.replace("ronin:", "0x");
 
-          const [{ items }, gameInfo, teamInfo] = await Promise.all([
+          const [[{ items }], [gameInfo], teamInfo] = await Promise.all([
             retry(() =>
               this.$axios.$get(
-                `https://game-api.skymavis.com/game-api/leaderboard?client_id=${address}&limit=1`
+                `https://game-api.axie.technology/mmr/${address}`
               )
             ),
             retry(() =>
               this.$axios.$get(
-                `https://game-api.skymavis.com/game-api/clients/${address}/items/1`
+                `https://game-api.axie.technology/slp/${address}`
               )
             ),
             retry(() =>
@@ -703,7 +706,9 @@ export default {
             ),
           ]);
 
-          const [, , leaderboard] = items;
+          const leaderboard = items.find(
+            ({ client_id }) => client_id.toLowerCase() === address.toLowerCase()
+          );
 
           const farmData = this.calcFarmData(gameInfo, scholarshipItem);
 
