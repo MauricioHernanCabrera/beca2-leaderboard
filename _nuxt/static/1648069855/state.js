@@ -1,0 +1,1 @@
+window.__NUXT__=(function(a){return {staticAssetsBase:"\u002Fbeca2-leaderboard\u002F_nuxt\u002Fstatic\u002F1648069855",layout:"default",error:a,serverRendered:true,routePath:"\u002F",config:{app:{basePath:"\u002Fbeca2-leaderboard\u002F",assetsPath:"\u002Fbeca2-leaderboard\u002F_nuxt\u002F",cdnURL:a}},apollo:{defaultClient:Object.create(null)}}}(null));
